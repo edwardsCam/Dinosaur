@@ -1,0 +1,44 @@
+CS 5890/6890 Open Source Software
+Course Project Proposal
+Spring 2015
+Overview
+Project Description and Background
+	We will be building a 3D, first-person-view, open-world game that revolves around dinosaurs. You play as a certain species, and the intent of the game is to forage and survive. As it is open-world, you are free to roam the environment in any direction.
+	We will be using Unity3d (unity3d.com) as our engine. Unity has a huge amount of built-in capabilities, like 3D rendering, camera movement, input gathering, and scripting/events. Without an engine like that, this game would be out of the scope of this class, but we think that Unity is a powerful enough tool to let us explore this game idea. A few of us have experience with Unity and 3D modeling already. Unity is well documented, and there are tons of tutorials and learning resources, so having little to no experience is only a small setback. The game will be written in C#.
+	During gameplay, you will eat certain plants and survive other dinosaurs, either by fighting or fleeing. Fighting will consist of moving within range of the enemy and performing a melee attack. The game has strong RPG elements, namely XP and a leveling system. Every dinosaur has a combination of attributes, including strength, agility, energy, senses, survivability, reproducibility, and intelligence. Attributes have points associated with them; the more points, the stronger the attribute. Attributes affect gameplay behind the scenes; for instance, “strength” affects how much health you have, and how much damage your attacks do. “Agility” affects how fast you move. “Survivability” affects how quickly you regenerate health, and so on. 
+XP is gained from performing certain actions, and when your XP reaches a threshold, you “level up” and are given additional points to put into your attributes. In this way, you can control your dinosaur’s evolutionary path and specialize in certain areas.
+	This game has good promise for multiplayer, but we think that’s out of scope for now. Our product at the end of this class will be single-player, with some very simple AI to play against. When an AI dinosaur detects the player, it will move toward the player and attack. There is much room for smarter AI, but again, that would have to be implemented later on. 
+
+Participants
+	Cameron Edwards
+	Dwight Bennett
+	Nelson Miller
+	Ryan Anderson
+	Jeffrey Williams
+	Michelle Ashton (not a USU student)    ( michelle.m.ashton@gmail.com )
+Contribution/Scope
+	We want a playable game, but realize that it involves many difficult concepts and will be very complex. As such, here is what we would like to have by the end of the semester:
+	• A working first-person view that allows the player to look around with the mouse, and move with the keyboard.
+	• At least one small, decent-looking map, with some uneven terrain and vegetation.
+	• Randomly generated NPC dinosaurs, with some minimal AI. They will stand still until the player moves within a certain radius of distance, at which point they will chase you and attack.
+	• We will have health implemented as a property of each dinosaur. A successful attack will remove health, and when health = 0 the dinosaur dies and is removed from the game.
+	• We will have attributes implemented as a property of each dinosaur. Attributes affect things like health and speed, and rely on a point system.
+	• XP and leveling. You get XP by eating, traveling, and fighting. After reaching thresholds, you level up. When you level up, you are given a few points to divvy up into your attributes.
+	• A basic HUD that displays health and XP.
+
+
+Schedule
+	February 10   - First-person view, movement, and a basic map.
+	March 17      - NPC dinosaurs, with AI.
+	April 21      - XP, leveling, and attributes. 
+
+
+Project Rubric
+Topic	Points	Received
+Implemented all features from proposal
+	100	
+
+Met each deadline
+	100	
+Regularly contributed throughout the entire semester	200	
+
