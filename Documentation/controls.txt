@@ -1,0 +1,6 @@
+Controls:
+l click: normal attack
+r click: interact
+caps: sprint
+shift: crouch/stalk
+space: jump
