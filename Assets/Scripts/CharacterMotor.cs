@@ -9,9 +9,9 @@ public class CharacterMotor : MonoBehaviour
     public bool canControl = true;
 
     public bool useFixedUpdate = true;
-    public Vector3 inputMoveDirection { get; set; }
+    public Vector3 inputMoveDirection;
 
-    public bool inputJump { get; set; }
+    public bool inputJump;
 
     public CharacterMotorMovement movement = new CharacterMotorMovement();
 
@@ -443,6 +443,7 @@ public class CharacterMotor : MonoBehaviour
     }
 }
 
+[System.Serializable]
 public class CharacterMotorMovement {
 	// The maximum horizontal speed when moving
 	public float maxForwardSpeed = 10.0F;
@@ -487,6 +488,7 @@ public enum MovementTransferOnJump {
 	PermaLocked // Jump is relative to the movement of the last touched floor and will move together with that floor.
 }
 
+[System.Serializable]
 // We will contain all the jumping related variables in one helper class for clarity.
 public class CharacterMotorJumping {
 	// Can the character jump?
@@ -527,7 +529,7 @@ public class CharacterMotorJumping {
 }
 
 
-
+[System.Serializable]
 public class CharacterMotorMovingPlatform {
 	public bool enabled = true;
 	
@@ -563,8 +565,8 @@ public class CharacterMotorMovingPlatform {
 }
 
 
-
-public class CharacterMotorSliding {
+[System.Serializable]
+public class CharacterMotorSliding{
 	// Does the character slide on too steep surfaces?
 	public bool enabled = true;
 	
