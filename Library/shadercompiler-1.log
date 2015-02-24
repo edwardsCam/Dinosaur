@@ -1,5 +1,5 @@
 Base path: C:/Program Files (x86)/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-1-9208
+Pipe name: \\.\pipe\UnityShaderCompiler-1-8436
 Cmd: getPlatforms
 Cmd: preprocess
   error: 2 plat 12 at (21): Can't find include file Tree.cginc
