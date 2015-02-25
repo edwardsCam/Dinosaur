@@ -1,15 +1,19 @@
 Base path: C:/Program Files (x86)/Unity/Editor/Data
+<<<<<<< HEAD
 Pipe name: \\.\pipe\UnityShaderCompiler-1-9208
+=======
+Pipe name: \\.\pipe\UnityShaderCompiler-1-4160
+>>>>>>> cameron-ai
 Cmd: getPlatforms
 Cmd: preprocess
-  error: 2 plat 12 at (21): Can't find include file Tree.cginc
-  error: 2 plat 12 at (24): Include callback failed
-  error: 2 plat 12 at (36): Syntax error
-  error: 2 plat 12 at (37): Syntax error
+  error: 2 plat 15 at (21): Can't find include file Tree.cginc
+  error: 2 plat 15 at (24): Include callback failed
+  error: 2 plat 15 at (36): Syntax error
+  error: 2 plat 15 at (37): Syntax error
   insize=1463 outsize=988 ok=0
 Cmd: preprocess
-  error: 2 plat 12 at (61): Can't find include file TreeVertexLit.cginc
-  error: 1 plat 12 at (250): Compiling shaders to OpenGL ES 2.0, Xbox 360, PS3, Flash or DX11 requires both vertex and fragment programs
-  error: 2 plat 12 at (273): Can't find include file Tree.cginc
-  error: 2 plat 12 at (478): Can't find include file TreeVertexLit.cginc
+  error: 2 plat 15 at (61): Can't find include file TreeVertexLit.cginc
+  error: 1 plat 15 at (250): Compiling shaders to OpenGL ES 2.0, Xbox 360, PS3, Flash or DX11 requires both vertex and fragment programs
+  error: 2 plat 15 at (273): Can't find include file Tree.cginc
+  error: 2 plat 15 at (478): Can't find include file TreeVertexLit.cginc
   insize=6288 outsize=2366 ok=0
