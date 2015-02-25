@@ -9,27 +9,29 @@
 //------------------------------------------------------------------------------
 using System;
 
-public abstract class Attribute
+namespace Attributes
 {
-	private float points;
-
-	public Attribute ()
+	public abstract class Attribute
 	{
-		points = 1.0f;
-	}
+		private float points;
 
-	protected float Points ()
-	{
-		return points;
-	}
+		public Attribute ()
+		{
+			points = 1.0f;
+		}
 
-	protected void AddPoints (float p)
-	{
-		points += p;
-		GetBenefitsFromPoints ();
-	}
+		protected float Points ()
+		{
+			return points;
+		}
 
-	protected abstract void GetBenefitsFromPoints ();
+		protected void AddPoints (float p)
+		{
+			points += p;
+			GetBenefitsFromPoints ();
+		}
+
+		protected abstract void GetBenefitsFromPoints ();
+	}
 }
-
 
