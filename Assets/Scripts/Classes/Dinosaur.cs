@@ -2,23 +2,29 @@ using System;
 
 public class Dinosaur
 {
-	protected Attributes.Strength strength;
-	protected Attributes.Agility agility;
-	protected Attributes.Energy energy;
-	protected Attributes.Sensory sensory;
-	protected Attributes.Survivability survivability;
-	protected Attributes.Reproducibility reproducibility;
-	protected Attributes.Intelligence intelligence;
+	protected Attribute.Strength strength;
+	protected Attribute.Agility agility;
+	protected Attribute.Energy energy;
+	protected Attribute.Sensory sensory;
+	protected Attribute.Survivability survivability;
+	protected Attribute.Reproducibility reproducibility;
+	protected Attribute.Intelligence intelligence;
+	
+	protected float current_hp;
+	protected float current_stamina;
 
 	public Dinosaur ()
 	{
-		strength = new Attributes.Strength ();
-		agility = new Attributes.Agility ();
-		energy = new Attributes.Energy ();
-		sensory = new Attributes.Sensory ();
-		survivability = new Attributes.Survivability ();
-		reproducibility = new Attributes.Reproducibility ();
-		intelligence = new Attributes.Intelligence ();
+		strength = new Attribute.Strength ();
+		agility = new Attribute.Agility ();
+		energy = new Attribute.Energy ();
+		sensory = new Attribute.Sensory ();
+		survivability = new Attribute.Survivability ();
+		reproducibility = new Attribute.Reproducibility ();
+		intelligence = new Attribute.Intelligence ();
+		
+		current_hp = strength.MaxHP ();
+		current_stamina = energy.MaxStamina ();
 	}
 	
 	#region Point adders
@@ -61,6 +67,16 @@ public class Dinosaur
 	#endregion
 	
 	#region Getters
+	
+	public float Current_HP ()
+	{
+		return current_hp;
+	}
+	
+	public float Current_Stamina ()
+	{
+		return current_stamina;
+	}
 	
 	#region Strength
 	

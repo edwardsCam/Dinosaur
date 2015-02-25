@@ -1,6 +1,6 @@
 using System;
 
-namespace Attributes
+namespace Attribute
 {
 	public class Survivability : Attribute
 	{
@@ -39,6 +39,25 @@ namespace Attributes
 		public int RespawnTime ()
 		{
 			return respawn_time;
+		}
+		
+		#endregion
+		
+		#region Setters and Mutators
+		
+		public void AddHPRegenBase (float b)
+		{
+			hp_regen.AddBase (b);
+		}
+		
+		public void AddHPRegenModifier (float m)
+		{
+			hp_regen.AddModifier (m);
+		}
+		
+		public void AddToRespawnTime (int t)
+		{
+			respawn_time += t;
 		}
 		
 		#endregion

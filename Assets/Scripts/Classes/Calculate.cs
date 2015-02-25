@@ -1,5 +1,13 @@
 using System;
 
+/*
+
+Calculate.cs
+
+...Static class containing methods that convert points (from an attribute) into actual values.
+
+*/
+
 static class Calculate
 {
 	#region Strength

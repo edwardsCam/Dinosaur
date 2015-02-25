@@ -1,6 +1,6 @@
 using System;
 
-namespace Attributes
+namespace Attribute
 {
 	public class Energy : Attribute
 	{
