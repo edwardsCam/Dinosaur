@@ -46,24 +46,24 @@ namespace Attribute
 		
 		#region Setters and Mutators
 		
-		public void AddMaxStaminaBase (float b)
+		public void AddTo_MaxStamina_Base (float b)
 		{
-			max_stamina.AddBase (b);
+			max_stamina.AddTo_Base (b);
 		}
 		
-		public void AddMaxStaminaModifier (float m)
+		public void AddTo_MaxStamina_Modifier (float m)
 		{
-			max_stamina.AddModifier (m);
+			max_stamina.AddTo_Modifier (m);
 		}
 		
-		public void AddStaminaExpendBase (float b)
+		public void AddTo_StaminaExpend_Base (float b)
 		{
-			stamina_expend.AddBase (b);
+			stamina_expend.AddTo_Base (b);
 		}
 		
-		public void AddStaminaExpendModifier (float m)
+		public void AddTo_StaminaExpend_Modifier (float m)
 		{
-			stamina_expend.AddModifier (m);
+			stamina_expend.AddTo_Modifier (m);
 		}
 		
 		#endregion

@@ -29,37 +29,37 @@ public class Dinosaur
 	
 	#region Point adders
 	
-	public void AddPointsStrength (float p)
+	public void AddPointsTo_Strength (float p)
 	{
 		strength.Add (p);
 	}
 	
-	public void AddPointsAgility (float p)
+	public void AddPointsTo_Agility (float p)
 	{
 		agility.Add (p);
 	}
 	
-	public void AddPointsEnergy (float p)
+	public void AddPointsTo_Energy (float p)
 	{
 		energy.Add (p);
 	}
 	
-	public void AddPointsSensory (float p)
+	public void AddPointsTo_Sensory (float p)
 	{
 		sensory.Add (p);
 	}
 	
-	public void AddPointsSurvivability (float p)
+	public void AddPointsTo_Survivability (float p)
 	{
 		survivability.Add (p);
 	}
 	
-	public void AddPointsReproducibility (float p)
+	public void AddPointsTo_Reproducibility (float p)
 	{
 		reproducibility.Add (p);
 	}
 	
-	public void AddPointsIntelligence (float p)
+	public void AddPointsTo_Intelligence (float p)
 	{
 		intelligence.Add (p);
 	}
@@ -120,11 +120,44 @@ public class Dinosaur
 	
 	#endregion
 	
-	#region Survivability
+	#region Sensory
+	
+	public int MinFieldOfView ()
+	{
+		return sensory.MinFieldOfView ();
+	}
+	
+	public int MaxFieldOfView ()
+	{
+		return sensory.MaxFieldOfView ();
+	}
+	
+	public int VisibilityDistance ()
+	{
+		return sensory.VisibilityDistance ();
+	}
+	
+	#endregion
+	
+	#region Reproducibility
 	
 	public int Respawn_Time ()
 	{
-		return survivability.RespawnTime ();
+		return reproducibility.RespawnTime ();
+	}
+	
+	public float Rebirth_Penalty ()
+	{
+		return reproducibility.RebirthPenalty ();
+	}
+	
+	#endregion
+	
+	#region Survivability
+	
+	public float Extra_Food_Benefit ()
+	{
+		return survivability.Extra_Food_Benefit ();
 	}
 	
 	public float HP_Regen ()
@@ -133,12 +166,6 @@ public class Dinosaur
 	}
 	
 	#endregion
-	
-	#endregion
-	
-	#region Setters and Mutators
-	
-	
 	
 	#endregion
 }

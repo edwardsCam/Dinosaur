@@ -30,7 +30,7 @@ public class AI_Behavior : MonoBehaviour
 		counter += delta;
 		if (counter > 10.0f) {
 			counter = 0.0f;
-			dino.AddPointsAgility (0.25f);
+			dino.AddPointsTo_Agility (0.25f);
 		}
 	}
 }

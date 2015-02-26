@@ -3,26 +3,18 @@ using System;
 class Benefit
 {
 	private float base_value;
+	private float extra;
 	private float modifier;
+	private bool can_multiply;
 	
 	#region Constructors
 
-	public Benefit ()
+	public Benefit (bool _can_multiply = true)
 	{
 		base_value = 1.0f;
 		modifier = 1.0f;
-	}
-
-	public Benefit (float b)
-	{
-		base_value = b;
-		modifier = 1.0f;
-	}
-
-	public Benefit (float b, float m)
-	{
-		base_value = b;
-		modifier = m;
+		extra = 0f;
+		can_multiply = _can_multiply;
 	}
 	
 	#endregion
@@ -31,7 +23,14 @@ class Benefit
 
 	public float Value ()
 	{
-		return base_value * modifier;
+		return (base_value + extra) * modifier;
+	}
+	
+	public int ValueAsInt ()
+	{
+	
+		//todo rounding???
+		return (int)((base_value + extra) * modifier);
 	}
 	
 	#endregion
@@ -45,17 +44,24 @@ class Benefit
 
 	public void SetModifier (float m)
 	{
-		modifier = m;
+		if (can_multiply)
+			modifier = m;
 	}
 
-	public void AddBase (float b)
+	public void AddTo_Base (float b)
 	{
-		base_value += b;
+		extra += b;
 	}
 
-	public void AddModifier (float m)
+	public void AddTo_Modifier (float m)
 	{
-		modifier += m;
+		if (can_multiply)
+			modifier += m;
+	}
+	
+	public void Reset_Extra ()
+	{
+		extra = 0f;
 	}
 	
 	#endregion

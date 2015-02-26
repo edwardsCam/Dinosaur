@@ -46,24 +46,24 @@ namespace Attribute
 
 		#region Setters and Mutators
 		
-		public void AddMovespeedBase (float b)
+		public void AddTo_Movespeed_Base (float b)
 		{
-			movespeed.AddBase (b);
+			movespeed.AddTo_Base (b);
 		}
 
-		public void AddMovespeedModifier (float m)
+		public void AddTo_Movespeed_Modifier (float m)
 		{
-			movespeed.AddModifier (m);
+			movespeed.AddTo_Modifier (m);
 		}
 
-		public void AddStaminaRegenBase (float b)
+		public void AddTo_StaminaRegen_Base (float b)
 		{
-			stamina_regen.AddBase (b);
+			stamina_regen.AddTo_Base (b);
 		}
 
-		public void AddStaminaRegenModifier (float m)
+		public void AddTo_StaminaRegen_Modifier (float m)
 		{
-			stamina_regen.AddModifier (m);
+			stamina_regen.AddTo_Modifier (m);
 		}
 		
 		#endregion

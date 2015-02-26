@@ -4,11 +4,13 @@ namespace Attribute
 {
 	public class Survivability : Attribute
 	{
-		private int respawn_time;
+	
+		private Benefit extra_food_benefit;
 		private Benefit hp_regen;
 		
 		public Survivability () : base()
 		{
+			extra_food_benefit = new Benefit (false);
 			hp_regen = new Benefit ();
 			GetBenefitsFromPoints ();
 		}
@@ -24,7 +26,7 @@ namespace Attribute
 		{
 			float p = base.Points ();
 			hp_regen.SetBase (Calculate._hpRegen (p));
-			respawn_time = Calculate._respawnTime (p);
+			extra_food_benefit.SetBase (Calculate._extraFoodBenefit (p));
 		}
 		
 		#endregion
@@ -36,28 +38,28 @@ namespace Attribute
 			return hp_regen.Value ();
 		}
 		
-		public int RespawnTime ()
+		public float Extra_Food_Benefit ()
 		{
-			return respawn_time;
+			return extra_food_benefit.Value ();
 		}
 		
 		#endregion
 		
 		#region Setters and Mutators
 		
-		public void AddHPRegenBase (float b)
+		public void AddTo_HPRegen_Base (float b)
 		{
-			hp_regen.AddBase (b);
+			hp_regen.AddTo_Base (b);
 		}
 		
-		public void AddHPRegenModifier (float m)
+		public void AddTo_HPRegen_Modifier (float m)
 		{
-			hp_regen.AddModifier (m);
+			hp_regen.AddTo_Modifier (m);
 		}
 		
-		public void AddToRespawnTime (int t)
+		public void AddTo_FoodBenefit (float b)
 		{
-			respawn_time += t;
+			extra_food_benefit.AddTo_Base (b);
 		}
 		
 		#endregion

@@ -58,6 +58,44 @@ static class Calculate
 
 	#endregion
 	
+	#region Sensory
+	
+	public static int _minFieldOfView (float points)
+	{
+		//todo
+		return 50;
+	}
+	
+	public static int _maxFieldOfView (float points)
+	{
+		//todo
+		return 100;
+	}
+	
+	public static int _distance (float points)
+	{
+		//todo
+		return 100;
+	}
+	
+	#endregion
+	
+	#region Reproducibility
+	
+	public static int _respawnTime (float points)
+	{
+		//todo
+		return 10;
+	}
+	
+	public static float _rebirthPenalty (float points)
+	{
+		//todo
+		return 1.0f;
+	}
+	
+	#endregion
+	
 	#region Survivability
 	
 	public static float _hpRegen (float points)
@@ -66,10 +104,10 @@ static class Calculate
 		return 1.0f;
 	}
 	
-	public static int _respawnTime (float points)
+	public static float _extraFoodBenefit (float points)
 	{
 		//todo
-		return 10;
+		return 0.15f;
 	}
 	
 	#endregion

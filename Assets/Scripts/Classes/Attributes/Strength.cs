@@ -46,24 +46,24 @@ namespace Attribute
 		
 		#region Setters and Mutators
 		
-		public void AddMaxHPBase (float b)
+		public void AddTo_MaxHP_Base (float b)
 		{
-			maxHP.AddBase (b);
+			maxHP.AddTo_Base (b);
 		}
 		
-		public void AddMaxHPModifier (float m)
+		public void AddTo_MaxHP_Modifier (float m)
 		{
-			maxHP.AddModifier (m);
+			maxHP.AddTo_Modifier (m);
 		}
 		
-		public void AddCombatStrengthBase (float b)
+		public void AddTo_CombatStrength_Base (float b)
 		{
-			combatStrength.AddBase (b);
+			combatStrength.AddTo_Base (b);
 		}
 		
-		public void AddCombatStrengthModifier (float m)
+		public void AddTo_CombatStrength_Modifier (float m)
 		{
-			combatStrength.AddModifier (m);
+			combatStrength.AddTo_Modifier (m);
 		}
 		
 		#endregion
