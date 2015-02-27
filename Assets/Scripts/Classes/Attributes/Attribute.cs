@@ -4,7 +4,7 @@ using System;
 
 Attribute.cs
 
-...Base class for all attributes. Only contains a point value.
+...Base class for all attributes. Contains a point value, and a bonus that can only come from Intelligence.
 
 */
 
@@ -12,21 +12,32 @@ namespace Attribute
 {
 	public abstract class Attribute
 	{
-		private float points;
+		private float base_points;
+		private float intel_bonus;
 
 		public Attribute ()
 		{
-			points = 1.0f;
+			base_points = 1f;
+			intel_bonus = 0f;
 		}
 
 		protected float Points ()
 		{
-			return points;
+			return base_points + intel_bonus;
 		}
 
-		protected void AddPoints (float p)
+		protected float IntelBonus ()
 		{
-			points += p;
+			return intel_bonus;
+		}
+
+		protected void AddPoints (float p, bool intel)
+		{
+			if (intel) {
+				intel_bonus += p;
+			} else {
+				base_points += p;
+			}
 			GetBenefitsFromPoints ();
 		}
 

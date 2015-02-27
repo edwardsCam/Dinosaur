@@ -29,7 +29,7 @@ class Benefit
 	public int ValueAsInt ()
 	{
 	
-		//todo rounding???
+		//TODO rounding???
 		return (int)((base_value + extra) * modifier);
 	}
 	

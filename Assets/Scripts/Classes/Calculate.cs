@@ -21,7 +21,7 @@ static class Calculate
 	
 	public static float _combatStrength (float points)
 	{
-		//todo
+		//TODO
 		return 1.0f * points;
 	}
 	
@@ -38,7 +38,7 @@ static class Calculate
 	
 	public static float _staminaRegen (float points)
 	{
-		//todo
+		//TODO
 		return 5.0f * points;
 	}
 	
@@ -48,13 +48,13 @@ static class Calculate
 	
 	public static float _maxStamina (float points)
 	{
-		//todo
+		//TODO
 		return 50.0f;
 	}
 	
 	public static float _staminaExpend (float points)
 	{
-		//todo
+		//TODO
 		return 10.0f;
 	}
 	
@@ -91,13 +91,13 @@ static class Calculate
 	
 	public static int _respawnTime (float points)
 	{
-		//todo
+		//TODO
 		return 10;
 	}
 	
 	public static float _rebirthPenalty (float points)
 	{
-		//todo
+		//TODO
 		return 1.0f;
 	}
 	
@@ -107,13 +107,13 @@ static class Calculate
 	
 	public static float _hpRegen (float points)
 	{
-		//todo
+		//TODO
 		return 1.0f;
 	}
 	
 	public static float _extraFoodBenefit (float points)
 	{
-		//todo
+		//TODO
 		return 0.15f;
 	}
 	

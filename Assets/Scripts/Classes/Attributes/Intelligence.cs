@@ -14,12 +14,13 @@ namespace Attribute
 		
 		public void Add (float p)
 		{
-			base.AddPoints (p);
+			base.AddPoints (p, false);
 		}
 		
 		protected override void GetBenefitsFromPoints ()
 		{
-			
+			//no benefits here.
+			//all benefits are applied to other attributes
 		}
 		
 		#endregion

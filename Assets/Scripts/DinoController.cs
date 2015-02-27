@@ -3,7 +3,6 @@ using System.Collections;
 
 public class DinoController : MonoBehaviour
 {
-
 	private Dinosaur me;
 	private CharacterMotor motor;
 	private Camera cam;
@@ -19,7 +18,7 @@ public class DinoController : MonoBehaviour
 	private int zoomState = 0;
 	private int nextZoomState = 0;
 	private bool zooming = false;
-           	#endregion
+	#endregion
 	
 	void Start ()
 	{
@@ -28,13 +27,25 @@ public class DinoController : MonoBehaviour
 		cam = GameObject.FindWithTag ("MainCamera").camera;
 		normalFOV = cam.fieldOfView;
 
-		//todo PLACEHOLDER
+		//******************
+		//TODO placeholder
 		{
-			me.AddPointsTo_Agility (10);
-			me.AddPointsTo_Sensory (5);
-			update_speed ();
-			update_visibility ();
+			//me.AddPointsTo_Agility (10);
+			//me.AddPointsTo_Sensory (5);
+			me.AddPointsTo_Intelligence (10);
+
 		}
+		//******************
+
+		update_speed ();
+		update_visibility ();
+	}
+
+	// Update is called once per frame
+	void Update ()
+	{
+		if (zooming_enabled)
+			zoom (Time.deltaTime);
 	}
 
 	#region Camera and Motor Update functions
@@ -123,11 +134,4 @@ public class DinoController : MonoBehaviour
 	}
 
 	#endregion
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		if (zooming_enabled)
-			zoom (Time.deltaTime);
-	}
 }

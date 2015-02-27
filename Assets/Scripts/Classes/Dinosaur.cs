@@ -62,6 +62,15 @@ public class Dinosaur
 	public void AddPointsTo_Intelligence (float p)
 	{
 		intelligence.Add (p);
+
+		//blanket improvement over all attributes
+		float p_frac = p / 6f;
+		strength.Add (p_frac, true);
+		agility.Add (p_frac, true);
+		energy.Add (p_frac, true);
+		sensory.Add (p_frac, true);
+		survivability.Add (p_frac, true);
+		reproducibility.Add (p_frac, true);
 	}
 	
 	#endregion
