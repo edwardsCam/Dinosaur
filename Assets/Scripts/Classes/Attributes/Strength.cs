@@ -25,7 +25,7 @@ namespace Attribute
 		{
 			float p = base.Points ();
 			maxHP.SetBase (Calculate._maxHP (p));
-			combatStrength.SetBase (Calculate._combat (p));
+			combatStrength.SetBase (Calculate._combatStrength (p));
 		}
 		
 		#endregion

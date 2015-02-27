@@ -4,7 +4,7 @@ namespace Attribute
 {
 	public class Sensory : Attribute
 	{
-	
+		
 		private Benefit min_fov;
 		private Benefit max_fov;
 		private Benefit distance;
@@ -36,19 +36,19 @@ namespace Attribute
 		
 		#region Getters
 		
-		public int MinFieldOfView ()
+		public float MinFieldOfView ()
 		{
-			return min_fov.ValueAsInt ();
+			return min_fov.Value ();
 		}
 		
-		public int MaxFieldOfView ()
+		public float MaxFieldOfView ()
 		{
-			return max_fov.ValueAsInt ();
+			return max_fov.Value ();
 		}
 		
-		public int VisibilityDistance ()
+		public float VisibilityDistance ()
 		{
-			return distance.ValueAsInt ();
+			return distance.Value ();
 		}
 		
 		#endregion

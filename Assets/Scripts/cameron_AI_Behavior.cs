@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AI_Behavior : MonoBehaviour
+public class cameron_AI_Behavior : MonoBehaviour
 {
 	public GameObject player;
 	private Dinosaur dino;

@@ -122,17 +122,17 @@ public class Dinosaur
 	
 	#region Sensory
 	
-	public int MinFieldOfView ()
+	public float MinFieldOfView ()
 	{
 		return sensory.MinFieldOfView ();
 	}
 	
-	public int MaxFieldOfView ()
+	public float MaxFieldOfView ()
 	{
 		return sensory.MaxFieldOfView ();
 	}
 	
-	public int VisibilityDistance ()
+	public float VisibilityDistance ()
 	{
 		return sensory.VisibilityDistance ();
 	}
