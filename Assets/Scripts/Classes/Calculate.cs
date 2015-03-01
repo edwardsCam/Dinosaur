@@ -21,8 +21,9 @@ static class Calculate
 	
 	public static float _combatStrength (float points)
 	{
-		//TODO
-		return 1.0f * points;
+		//1  point  -> 5
+		//10 points -> 25
+		return 2.778f + 2.222f * points;
 	}
 	
 	#endregion
@@ -38,8 +39,9 @@ static class Calculate
 	
 	public static float _staminaRegen (float points)
 	{
-		//TODO
-		return 5.0f * points;
+		//1  point  -> 1
+		//10 points -> 10
+		return points;
 	}
 	
 	#endregion
@@ -48,14 +50,16 @@ static class Calculate
 	
 	public static float _maxStamina (float points)
 	{
-		//TODO
-		return 50.0f;
+		//1  point  -> 30
+		//10 points -> 300
+		return 30f * points;
 	}
 	
 	public static float _staminaExpend (float points)
 	{
-		//TODO
-		return 10.0f;
+		//1  point  -> 15
+		//10 points -> 3
+		return 16.333f - 1.333f * points;
 	}
 	
 	#endregion

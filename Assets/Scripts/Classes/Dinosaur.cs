@@ -13,6 +13,11 @@ public class Dinosaur
 	protected float current_hp;
 	protected float current_stamina;
 
+	protected Benefit hit_radius;
+	protected Benefit attack_radius;
+
+	protected bool isDead = false;
+
 	public Dinosaur ()
 	{
 		strength = new Attribute.Strength ();
@@ -25,7 +30,59 @@ public class Dinosaur
 		
 		current_hp = strength.MaxHP ();
 		current_stamina = energy.MaxStamina ();
+
+		hit_radius = new Benefit ();
+		attack_radius = new Benefit ();
+
+		hit_radius.SetBase (5);
+		attack_radius.SetBase (5);
 	}
+
+	#region Actions
+
+	public void Attack (Dinosaur other)
+	{
+		float expend = energy.StaminaExpenditure ();
+		if (current_stamina >= expend) {
+			float damage = strength.CombatStrength ();
+			other.TakeDamage (damage);
+			current_stamina -= expend;
+		}
+	}
+
+	public void TakeDamage (float d)
+	{
+		current_hp -= d;
+		if (current_hp <= 0) {
+			Die ();
+		}
+	}
+
+	protected void Die ()
+	{
+		//TODO
+		isDead = true;
+	}
+
+	public void Heal (float delta)
+	{
+		if (!isDead) {
+			Restore_HP (delta * survivability.HP_Regen ());
+			Restore_Stamina (delta * agility.StaminaRegen ());
+		}
+	}
+
+	private void Restore_HP (float hp)
+	{
+		current_hp = Math.Min (current_hp + hp, strength.MaxHP ());
+	}
+
+	private void Restore_Stamina (float stam)
+	{
+		current_stamina = Math.Min (current_stamina + stam, energy.MaxStamina ());
+	}
+
+	#endregion
 	
 	#region Point adders
 	
@@ -85,6 +142,21 @@ public class Dinosaur
 	public float Current_Stamina ()
 	{
 		return current_stamina;
+	}
+
+	public float Hit_Radius ()
+	{
+		return hit_radius.Value ();
+	}
+
+	public float Attack_Radius ()
+	{
+		return attack_radius.Value ();
+	}
+
+	public bool Is_Dead ()
+	{
+		return isDead;
 	}
 	
 	#region Strength

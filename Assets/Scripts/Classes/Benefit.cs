@@ -1,6 +1,6 @@
 using System;
 
-class Benefit
+public class Benefit
 {
 	private float base_value;
 	private float extra;
