@@ -9,11 +9,13 @@ Temp
 *.pidb
 *.userprefs
 
+Library/
 Library/cache/*
 Library/metadata/*
 Library/previews/*
 Library/ScriptAssemblies/*
 Library/CurrentLayout.dwlt
+Library/CurrentMaximizeLayout.dwlt
 
 AnnotationManager
 assetDatabase3
