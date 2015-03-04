@@ -11,4 +11,11 @@ namespace Assets.Scripts
         Health,
         Stamina,
     }
+    public enum Dinosaur
+    {
+        none,
+        Raptor,
+        Small,
+        TRex,
+    }
 }
