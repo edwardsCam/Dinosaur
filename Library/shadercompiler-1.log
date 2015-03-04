@@ -1,9 +1,14 @@
+<<<<<<< HEAD
+Base path: D:/Program Files (x86)/Editor/Data
+Pipe name: \\.\pipe\UnityShaderCompiler-1-16656
+=======
 Base path: C:/Program Files (x86)/Unity/Editor/Data
 <<<<<<< HEAD
 Pipe name: \\.\pipe\UnityShaderCompiler-1-9208
 =======
 Pipe name: \\.\pipe\UnityShaderCompiler-1-4160
 >>>>>>> cameron-ai
+>>>>>>> cd74c08d14ce40203ca949aa490ca4b371124531
 Cmd: getPlatforms
 Cmd: preprocess
   error: 2 plat 15 at (21): Can't find include file Tree.cginc
