@@ -32,7 +32,7 @@ public class DinoController : MonoBehaviour
 	{
 		me = new Dinosaur ();
 		motor = GetComponent<CharacterMotor> ();
-		cam = GameObject.FindWithTag ("MainCamera").camera;
+		cam = GameObject.FindWithTag ("MainCamera").GetComponent<Camera>();
 		normalFOV = cam.fieldOfView;
 
 		//******************
