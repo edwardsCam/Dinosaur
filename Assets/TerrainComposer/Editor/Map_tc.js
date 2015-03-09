@@ -5545,7 +5545,7 @@ class Map_tc extends EditorWindow
 			set_terrain_splat_textures(terrainArea1.terrains[count_terrain]);
 			
 			// Add RTP if there
-			terrainArea1.terrains[count_terrain].rtp_script = terrainArea1.terrains[count_terrain].terrain.gameObject.AddComponent("ReliefTerrain");
+			terrainArea1.terrains[count_terrain].rtp_script = UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(terrainArea1.terrains[count_terrain].terrain.gameObject, "Assets/TerrainComposer/Editor/Map_tc.js(5548,75)", "ReliefTerrain");
 			if (terrainArea1.terrains[count_terrain].rtp_script) {
 				terrainArea1.terrains[count_terrain].rtp_script.ColorGlobal = AssetDatabase.LoadAssetAtPath(path,Texture2D) as Texture2D;
 				

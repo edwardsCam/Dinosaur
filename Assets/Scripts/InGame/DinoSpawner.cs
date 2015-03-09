@@ -19,21 +19,22 @@ public class DinoSpawner : MonoBehaviour {
 	
     private void DestroySpawner()
     {
+		//test
         Destroy(gameObject, 3);
     }
-	
-    private void SpawnDino(Dinosaur dino)
+
+    private void SpawnDino(DinosaurType dino)
     {
         //I know this is bad code but I'm using it as a hotfix.
-        if(dino == Dinosaur.TRex)
+        if (dino == DinosaurType.TRex)
         {
             Spawn(tRex);
         }
-        else if (dino == Dinosaur.Small)
+        else if (dino == DinosaurType.Small)
         {
             Spawn(smallDino);
         }
-        else if (dino == Dinosaur.Raptor)
+        else if (dino == DinosaurType.Raptor)
         {
             Spawn(raptor);
         }

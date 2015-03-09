@@ -11,7 +11,7 @@ namespace Assets.Scripts
         Health,
         Stamina,
     }
-    public enum Dinosaur
+    public enum DinosaurType
     {
         none,
         Raptor,
