@@ -9,13 +9,18 @@ public class DinoSpawner : MonoBehaviour {
     public GameObject smallDino;
     public GameObject raptor;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         GameSettings settings = GameObject.FindGameObjectWithTag("Settings").GetComponent<GameSettings>();
         SpawnDino(settings.GetCurrentDinosaur());
-
+        StartUI();
         DestroySpawner();
 	
 	}
+
+    private void StartUI()
+    {
+        GameObject.FindGameObjectWithTag("UIManager").GetComponent<VitalsVM>().Initialize();
+    }
 	
     private void DestroySpawner()
     {
@@ -43,5 +48,6 @@ public class DinoSpawner : MonoBehaviour {
     private void Spawn(GameObject dino)
     {
         GameObject instance = (GameObject)GameObject.Instantiate(dino, transform.position, transform.rotation);
+        instance.tag = "Player";
     }
 }

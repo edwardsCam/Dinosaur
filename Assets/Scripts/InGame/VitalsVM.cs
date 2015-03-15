@@ -11,25 +11,29 @@ public class VitalsVM : MonoBehaviour {
     private Slider healthSlider;
     private Text staminaText;
     private Slider staminaSlider;
-    private Dinosaur dino;
+    private DinoController dino;
+    bool ready = false;
 	// Use this for initialization
-	void Start () 
+	public void Initialize() 
     {
         healthSlider = healthBar.GetComponent<Slider>();
         staminaSlider = staminaBar.GetComponent<Slider>();
         healthText = healthBar.GetComponentInChildren<Text>();
         staminaText = staminaBar.GetComponentInChildren<Text>();
-        dino = GameObject.FindGameObjectWithTag("Player").GetComponent<DinoController>().GetDinosaur();
-        
+        dino = GameObject.FindGameObjectWithTag("Player").GetComponent<DinoController>();
+        ready = true;
     }
 	
 	// Update is called once per frame
 	void Update () 
     {
-        healthSlider.value = dino.Current_HP()/dino.Max_HP();
-        staminaSlider.value = dino.Current_Stamina()/dino.Max_Stamina();
-        healthText.text = (dino.Current_HP() / dino.Max_HP() * 100).ToString();
-        staminaText.text = (dino.Current_Stamina() / dino.Max_Stamina() * 100).ToString(); ;
+        if (ready)
+        {
+            healthSlider.value = dino.GetDinosaur().Current_HP() / dino.GetDinosaur().Max_HP();
+            staminaSlider.value = dino.GetDinosaur().Current_Stamina() / dino.GetDinosaur().Max_Stamina();
+            healthText.text = ((int)dino.GetDinosaur().Current_HP()).ToString() + '/' + ((int)dino.GetDinosaur().Max_HP()).ToString();
+            staminaText.text = ((int)dino.GetDinosaur().Current_Stamina()).ToString() + '/' + ((int)dino.GetDinosaur().Max_Stamina()).ToString();
+        }
 
 	}
 }
