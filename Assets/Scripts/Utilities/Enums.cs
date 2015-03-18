@@ -5,17 +5,17 @@ using System.Text;
 
 namespace Assets.Scripts
 {
-    public enum VitalCategory
-    {
-        none,
-        Health,
-        Stamina,
-    }
-    public enum DinosaurType
-    {
-        none,
-        Raptor,
-        Small,
-        TRex,
-    }
+	public enum VitalCategory
+	{
+		none,
+		Health,
+		Stamina,
+	}
+	public enum DinosaurType
+	{
+		none,
+		Raptor,
+		Small,
+		TRex,
+	}
 }

@@ -7,6 +7,8 @@ public class DinoController : MonoBehaviour
 	private CharacterMotor motor;
 	private Camera cam;
 
+	public Assets.Scripts.DinosaurType species;
+
 	#region Zoom Variables
 	private bool zooming_enabled = true;
 	public float zoomTime = 0.35f;
@@ -29,19 +31,17 @@ public class DinoController : MonoBehaviour
 	
 	void Start ()
 	{
-		me = new Dinosaur ();
+		if (species == Assets.Scripts.DinosaurType.TRex) {
+			me = new TRex ();
+		} else if (species == Assets.Scripts.DinosaurType.Raptor) {
+			me = new Velociraptor ();
+		} else {
+			me = new Dinosaur ();
+		}
+
 		motor = GetComponent<CharacterMotor> ();
 		cam = GameObject.FindWithTag ("MainCamera").GetComponent<Camera> ();
 		normalFOV = cam.fieldOfView;
-
-		//******************
-		//TODO placeholder
-		{
-			//me.AddPointsTo_Agility (10);
-			//me.AddPointsTo_Sensory (5);
-			me.AddPointsTo_Intelligence (10);
-		}
-		//******************
 
 		update_speed ();
 		update_visibility ();
@@ -65,6 +65,15 @@ public class DinoController : MonoBehaviour
 
 	void UpdateGameLogic (float delta)
 	{
+		if (me.FLAG_movespeed_changed) {
+			update_speed ();
+			me.FLAG_movespeed_changed = false;
+		}
+		if (me.FLAG_visibility_changed) {
+			update_visibility ();
+			me.FLAG_visibility_changed = false;
+		}
+
 		if (zooming_enabled && zooming) {
 			inc_zoom (delta);
 		}
@@ -94,6 +103,7 @@ public class DinoController : MonoBehaviour
 	void update_speed ()
 	{
 		float speed = me.Movespeed ();
+		Debug.Log (speed);
 		motor.movement.maxForwardSpeed = speed;
 		motor.movement.maxSidewaysSpeed = speed * 0.85f;
 		motor.movement.maxBackwardsSpeed = speed * 0.75f;

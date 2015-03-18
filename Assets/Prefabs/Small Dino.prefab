@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607098f7bae05b2429e5c532fa64f09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  species: 2
   zoomTime: .349999994
 --- !u!114 &11466650
 MonoBehaviour:
@@ -229,9 +230,9 @@ MonoBehaviour:
   inputMoveDirection: {x: 0, y: 0, z: 0}
   inputJump: 0
   movement:
-    maxForwardSpeed: 12
-    maxSidewaysSpeed: 12
-    maxBackwardsSpeed: 12
+    maxForwardSpeed: 0
+    maxSidewaysSpeed: 0
+    maxBackwardsSpeed: 0
     slopeSpeedMultiplier:
       serializedVersion: 2
       m_Curve:
@@ -252,10 +253,10 @@ MonoBehaviour:
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-    maxGroundAcceleration: 100
-    maxAirAcceleration: 100
-    gravity: 25
-    maxFallSpeed: 50
+    maxGroundAcceleration: 50
+    maxAirAcceleration: 10
+    gravity: 40
+    maxFallSpeed: 9999
   jumping:
     enabled: 1
     baseHeight: 3

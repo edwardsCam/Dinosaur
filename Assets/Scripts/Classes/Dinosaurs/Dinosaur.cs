@@ -16,6 +16,9 @@ public class Dinosaur
 	protected float current_stamina;
 	protected Benefit attack_radius;
 
+	public bool FLAG_movespeed_changed = false;
+	public bool FLAG_visibility_changed = false;
+
 	public Dinosaur ()
 	{
 		strength = new Attribute.Strength ();
@@ -93,6 +96,7 @@ public class Dinosaur
 	public void AddPointsTo_Agility (float p, bool is_intel_bonus = false)
 	{
 		agility.Add (p, is_intel_bonus);
+		FLAG_movespeed_changed = true;
 	}
 	
 	public void AddPointsTo_Energy (float p, bool is_intel_bonus = false)
@@ -105,6 +109,7 @@ public class Dinosaur
 	public void AddPointsTo_Sensory (float p, bool is_intel_bonus = false)
 	{
 		sensory.Add (p, is_intel_bonus);
+		FLAG_visibility_changed = true;
 	}
 	
 	public void AddPointsTo_Survivability (float p, bool is_intel_bonus = false)
