@@ -20,6 +20,10 @@ public class BasicWalkingScript : MonoBehaviour {
 //		print (navAgent.destination);
 //		print (navAgent.remainingDistance);
 //		pritn (navAgent.
+		if (target == null) {
+			target = GameObject.FindGameObjectWithTag("Player").transform;
+		}
+
 		navAgent.destination = target.position;
 //		if (navAgent.remainingDistance > navAgent.stoppingDistance || double.IsInfinity(navAgent.remainingDistance) || navAgent.remainingDistance <= navAgent.stoppingDistance / 2) {
 //			print ("setting target");
