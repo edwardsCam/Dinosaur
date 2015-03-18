@@ -26,12 +26,6 @@ public class cameron_AI_Behavior : MonoBehaviour
 			pos.x += Mathf.Cos (theta) * speed;
 			pos.z += Mathf.Sin (theta) * speed;
 			transform.position = pos;
-
-			counter += delta;
-			if (counter > 1.0f) {
-				counter = 0.0f;
-				dino.AddPointsTo_Agility (0.05f);
-			}
 			dino.Heal (delta);
 		}
 	}

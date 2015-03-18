@@ -86,43 +86,43 @@ public class Dinosaur
 	
 	#region Point adders
 	
-	public void AddPointsTo_Strength (float p, bool is_intel_bonus = false)
+	protected void AddPointsTo_Strength (float p, bool is_intel_bonus = false)
 	{
 		float oldHP = strength.MaxHP ();
 		strength.Add (p, is_intel_bonus);
 		current_hp += strength.MaxHP () - oldHP;
 	}
 	
-	public void AddPointsTo_Agility (float p, bool is_intel_bonus = false)
+	protected void AddPointsTo_Agility (float p, bool is_intel_bonus = false)
 	{
 		agility.Add (p, is_intel_bonus);
 		FLAG_movespeed_changed = true;
 	}
 	
-	public void AddPointsTo_Energy (float p, bool is_intel_bonus = false)
+	protected void AddPointsTo_Energy (float p, bool is_intel_bonus = false)
 	{
 		float oldStam = energy.MaxStamina ();
 		energy.Add (p, is_intel_bonus);
 		current_stamina += energy.MaxStamina () - oldStam;
 	}
 	
-	public void AddPointsTo_Sensory (float p, bool is_intel_bonus = false)
+	protected void AddPointsTo_Sensory (float p, bool is_intel_bonus = false)
 	{
 		sensory.Add (p, is_intel_bonus);
 		FLAG_visibility_changed = true;
 	}
 	
-	public void AddPointsTo_Survivability (float p, bool is_intel_bonus = false)
+	protected void AddPointsTo_Survivability (float p, bool is_intel_bonus = false)
 	{
 		survivability.Add (p, is_intel_bonus);
 	}
 	
-	public void AddPointsTo_Reproducibility (float p, bool is_intel_bonus = false)
+	protected void AddPointsTo_Reproducibility (float p, bool is_intel_bonus = false)
 	{
 		reproducibility.Add (p, is_intel_bonus);
 	}
 	
-	public void AddPointsTo_Intelligence (float p)
+	protected void AddPointsTo_Intelligence (float p)
 	{
 		intelligence.Add (p);
 

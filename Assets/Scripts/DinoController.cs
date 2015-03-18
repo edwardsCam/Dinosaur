@@ -32,9 +32,9 @@ public class DinoController : MonoBehaviour
 	void Start ()
 	{
 		if (species == Assets.Scripts.DinosaurType.TRex) {
-			me = new TRex ();
+			me = new Species.TRex ();
 		} else if (species == Assets.Scripts.DinosaurType.Raptor) {
-			me = new Velociraptor ();
+			me = new Species.Velociraptor ();
 		} else {
 			me = new Dinosaur ();
 		}
@@ -103,7 +103,6 @@ public class DinoController : MonoBehaviour
 	void update_speed ()
 	{
 		float speed = me.Movespeed ();
-		Debug.Log (speed);
 		motor.movement.maxForwardSpeed = speed;
 		motor.movement.maxSidewaysSpeed = speed * 0.85f;
 		motor.movement.maxBackwardsSpeed = speed * 0.75f;

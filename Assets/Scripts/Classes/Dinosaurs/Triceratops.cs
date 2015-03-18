@@ -1,14 +1,14 @@
 namespace Species
 {
-	public class Velociraptor : Dinosaur
+	public class Triceratops : Dinosaur
 	{
-		public Velociraptor () : base()
+		public Triceratops () : base()
 		{
 			//these numbers are taken from https://docs.google.com/spreadsheets/d/1iFu6LpLsf9QlxIve1ivWTQ2Rtc8C55LqGwW69TnCPdY
-			AddPointsTo_Agility (3);
-			AddPointsTo_Sensory (1);
+			AddPointsTo_Strength (2);
+			AddPointsTo_Energy (3);
 			AddPointsTo_Reproducibility (1);
-			AddPointsTo_Intelligence (3);
+			AddPointsTo_Survivability (2);
 		}
 	}
 }
