@@ -2,6 +2,7 @@ using System;
 
 public class Dinosaur
 {
+
 	protected Attribute.Strength strength;
 	protected Attribute.Agility agility;
 	protected Attribute.Energy energy;
