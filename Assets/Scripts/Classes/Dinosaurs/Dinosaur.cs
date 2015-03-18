@@ -1,4 +1,5 @@
 using System;
+using System.Xml.Linq;
 
 public class Dinosaur
 {
@@ -85,6 +86,34 @@ public class Dinosaur
 	#endregion
 	
 	#region Point adders
+
+	protected void BuildAttributesFromXML (string name)
+	{
+		var doc = XDocument.Load ("documentation/attributes.xml").Element ("species").Element (name);
+
+		int str = Convert.ToInt16 (doc.Element ("strength").Value) - 1;
+		int agi = Convert.ToInt16 (doc.Element ("agility").Value) - 1;
+		int ene = Convert.ToInt16 (doc.Element ("energy").Value) - 1;
+		int sen = Convert.ToInt16 (doc.Element ("sensory").Value) - 1;
+		int rep = Convert.ToInt16 (doc.Element ("reproducibility").Value) - 1;
+		int sur = Convert.ToInt16 (doc.Element ("survivability").Value) - 1;
+		int tel = Convert.ToInt16 (doc.Element ("intelligence").Value) - 1;
+
+		if (str > 0)
+			AddPointsTo_Strength (str);
+		if (agi > 0)
+			AddPointsTo_Agility (agi);
+		if (ene > 0)
+			AddPointsTo_Energy (ene);
+		if (sen > 0)
+			AddPointsTo_Sensory (sen);
+		if (rep > 0)
+			AddPointsTo_Reproducibility (rep);
+		if (sur > 0)
+			AddPointsTo_Survivability (sur);
+		if (tel > 0)
+			AddPointsTo_Intelligence (tel);
+	}
 	
 	protected void AddPointsTo_Strength (float p, bool is_intel_bonus = false)
 	{

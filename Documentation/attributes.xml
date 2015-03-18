@@ -1,0 +1,60 @@
+<!-- these numbers are taken from https://docs.google.com/spreadsheets/d/1iFu6LpLsf9QlxIve1ivWTQ2Rtc8C55LqGwW69TnCPdY -->
+
+<species>
+	
+	<trex>
+		<strength>5</strength>
+		<agility>1</agility>
+		<energy>2</energy>
+		<sensory>2</sensory>
+		<reproducibility>1</reproducibility>
+		<survivability>3</survivability>
+		<intelligence>1</intelligence>
+	</trex>
+	<velociraptor>
+		<strength>1</strength>
+		<agility>4</agility>
+		<energy>1</energy>
+		<sensory>2</sensory>
+		<reproducibility>2</reproducibility>
+		<survivability>1</survivability>
+		<intelligence>4</intelligence>
+	</velociraptor>
+	<triceratops>
+		<strength>3</strength>
+		<agility>1</agility>
+		<energy>4</energy>
+		<sensory>1</sensory>
+		<reproducibility>2</reproducibility>
+		<survivability>3</survivability>
+		<intelligence>1</intelligence>
+	</triceratops>
+	<spinosaurus>
+		<strength>2</strength>
+		<agility>3</agility>
+		<energy>2</energy>
+		<sensory>2</sensory>
+		<reproducibility>3</reproducibility>
+		<survivability>2</survivability>
+		<intelligence>1</intelligence>
+	</spinosaurus>
+	<brachiosaurus>
+		<strength>3</strength>
+		<agility>1</agility>
+		<energy>2</energy>
+		<sensory>2</sensory>
+		<reproducibility>1</reproducibility>
+		<survivability>5</survivability>
+		<intelligence>1</intelligence>
+	</brachiosaurus>
+	<allosaurus>
+		<strength>3</strength>
+		<agility>1</agility>
+		<energy>2</energy>
+		<sensory>2</sensory>
+		<reproducibility>3</reproducibility>
+		<survivability>3</survivability>
+		<intelligence>1</intelligence>
+	</allosaurus>
+	
+</species>
