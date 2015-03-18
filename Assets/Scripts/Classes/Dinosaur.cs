@@ -2,6 +2,7 @@ using System;
 
 public class Dinosaur
 {
+	protected bool isAlive = true;
 
 	protected Attribute.Strength strength;
 	protected Attribute.Agility agility;
@@ -10,14 +11,10 @@ public class Dinosaur
 	protected Attribute.Survivability survivability;
 	protected Attribute.Reproducibility reproducibility;
 	protected Attribute.Intelligence intelligence;
-	
+
 	protected float current_hp;
 	protected float current_stamina;
-
-	protected Benefit hit_radius;
 	protected Benefit attack_radius;
-
-	protected bool isDead = false;
 
 	public Dinosaur ()
 	{
@@ -31,12 +28,9 @@ public class Dinosaur
 		
 		current_hp = strength.MaxHP ();
 		current_stamina = energy.MaxStamina ();
-
-		hit_radius = new Benefit ();
+		
 		attack_radius = new Benefit ();
-
-		hit_radius.SetBase (5);
-		attack_radius.SetBase (5);
+		attack_radius.SetBase (5); //TODO
 	}
 
 	#region Actions
@@ -45,8 +39,10 @@ public class Dinosaur
 	{
 		float expend = energy.StaminaExpenditure ();
 		if (current_stamina >= expend) {
-			float damage = strength.CombatStrength ();
-			other.TakeDamage (damage);
+			if (other != null) {
+				float damage = strength.CombatStrength ();
+				other.TakeDamage (damage);
+			}
 			current_stamina -= expend;
 		}
 	}
@@ -62,12 +58,12 @@ public class Dinosaur
 	protected void Die ()
 	{
 		//TODO
-		isDead = true;
+		isAlive = false;
 	}
 
 	public void Heal (float delta)
 	{
-		if (!isDead) {
+		if (isAlive) {
 			Restore_HP (delta * survivability.HP_Regen ());
 			Restore_Stamina (delta * agility.StaminaRegen ());
 		}
@@ -87,34 +83,38 @@ public class Dinosaur
 	
 	#region Point adders
 	
-	public void AddPointsTo_Strength (float p)
+	public void AddPointsTo_Strength (float p, bool is_intel_bonus = false)
 	{
-		strength.Add (p);
+		float oldHP = strength.MaxHP ();
+		strength.Add (p, is_intel_bonus);
+		current_hp += strength.MaxHP () - oldHP;
 	}
 	
-	public void AddPointsTo_Agility (float p)
+	public void AddPointsTo_Agility (float p, bool is_intel_bonus = false)
 	{
-		agility.Add (p);
+		agility.Add (p, is_intel_bonus);
 	}
 	
-	public void AddPointsTo_Energy (float p)
+	public void AddPointsTo_Energy (float p, bool is_intel_bonus = false)
 	{
-		energy.Add (p);
+		float oldStam = energy.MaxStamina ();
+		energy.Add (p, is_intel_bonus);
+		current_stamina += energy.MaxStamina () - oldStam;
 	}
 	
-	public void AddPointsTo_Sensory (float p)
+	public void AddPointsTo_Sensory (float p, bool is_intel_bonus = false)
 	{
-		sensory.Add (p);
+		sensory.Add (p, is_intel_bonus);
 	}
 	
-	public void AddPointsTo_Survivability (float p)
+	public void AddPointsTo_Survivability (float p, bool is_intel_bonus = false)
 	{
-		survivability.Add (p);
+		survivability.Add (p, is_intel_bonus);
 	}
 	
-	public void AddPointsTo_Reproducibility (float p)
+	public void AddPointsTo_Reproducibility (float p, bool is_intel_bonus = false)
 	{
-		reproducibility.Add (p);
+		reproducibility.Add (p, is_intel_bonus);
 	}
 	
 	public void AddPointsTo_Intelligence (float p)
@@ -123,12 +123,12 @@ public class Dinosaur
 
 		//blanket improvement over all attributes
 		float p_frac = p / 6f;
-		strength.Add (p_frac, true);
-		agility.Add (p_frac, true);
-		energy.Add (p_frac, true);
-		sensory.Add (p_frac, true);
-		survivability.Add (p_frac, true);
-		reproducibility.Add (p_frac, true);
+		AddPointsTo_Strength (p_frac, true);
+		AddPointsTo_Agility (p_frac, true);
+		AddPointsTo_Energy (p_frac, true);
+		AddPointsTo_Sensory (p_frac, true);
+		AddPointsTo_Survivability (p_frac, true);
+		AddPointsTo_Reproducibility (p_frac, true);
 	}
 	
 	#endregion
@@ -145,19 +145,14 @@ public class Dinosaur
 		return current_stamina;
 	}
 
-	public float Hit_Radius ()
-	{
-		return hit_radius.Value ();
-	}
-
 	public float Attack_Radius ()
 	{
 		return attack_radius.Value ();
 	}
 
-	public bool Is_Dead ()
+	public bool Is_Alive ()
 	{
-		return isDead;
+		return isAlive;
 	}
 	
 	#region Strength

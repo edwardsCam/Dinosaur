@@ -14,7 +14,7 @@ public class cameron_AI_Behavior : MonoBehaviour
 
 	void FixedUpdate ()
 	{
-		if (!dino.Is_Dead ()) {
+		if (dino.Is_Alive ()) {
 			float delta = Time.deltaTime;
 
 			float xdiff = player.transform.position.x - transform.position.x;

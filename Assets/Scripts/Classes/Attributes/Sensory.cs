@@ -19,9 +19,9 @@ namespace Attribute
 		
 		#region Attribute methods
 		
-		public void Add (float p, bool intel = false)
+		public void Add (float p, bool is_intel_bonus)
 		{
-			base.AddPoints (p, intel);
+			base.AddPoints (p, is_intel_bonus);
 		}
 		
 		protected override void GetBenefitsFromPoints ()

@@ -3,38 +3,42 @@ using System.Collections;
 using Assets.Scripts;
 using UnityEngine.UI;
 
-public class VitalsVM : MonoBehaviour {
+public class VitalsVM : MonoBehaviour
+{
 
-    public GameObject healthBar;
-    public GameObject staminaBar;
-    private Text healthText;
-    private Slider healthSlider;
-    private Text staminaText;
-    private Slider staminaSlider;
-    private DinoController dino;
-    bool ready = false;
+	public GameObject healthBar;
+	public GameObject staminaBar;
+	private Text healthText;
+	private Slider healthSlider;
+	private Text staminaText;
+	private Slider staminaSlider;
+	private DinoController dino_controller;
+	bool ready = false;
 	// Use this for initialization
-	public void Initialize() 
-    {
-        healthSlider = healthBar.GetComponent<Slider>();
-        staminaSlider = staminaBar.GetComponent<Slider>();
-        healthText = healthBar.GetComponentInChildren<Text>();
-        staminaText = staminaBar.GetComponentInChildren<Text>();
-        dino = GameObject.FindGameObjectWithTag("Player").GetComponent<DinoController>();
-        ready = true;
-    }
+	public void Initialize ()
+	{
+		healthSlider = healthBar.GetComponent<Slider> ();
+		staminaSlider = staminaBar.GetComponent<Slider> ();
+		healthText = healthBar.GetComponentInChildren<Text> ();
+		staminaText = staminaBar.GetComponentInChildren<Text> ();
+		dino_controller = GameObject.FindGameObjectWithTag ("Player").GetComponent<DinoController> ();
+		ready = true;
+	}
 	
 	// Update is called once per frame
-	void Update () 
-    {
-        if (ready)
-        {
-            healthSlider.value = dino.GetDinosaur().Current_HP() / dino.GetDinosaur().Max_HP();
-            staminaSlider.value = dino.GetDinosaur().Current_Stamina() / dino.GetDinosaur().Max_Stamina();
-            healthText.text = ((int)dino.GetDinosaur().Current_HP()).ToString() + '/' + ((int)dino.GetDinosaur().Max_HP()).ToString();
-            staminaText.text = ((int)dino.GetDinosaur().Current_Stamina()).ToString() + '/' + ((int)dino.GetDinosaur().Max_Stamina()).ToString();
-        }
-
+	void Update ()
+	{
+		if (ready) {
+			Dinosaur d = dino_controller.GetDinosaur ();
+			float currhp = d.Current_HP ();
+			float currstam = d.Current_Stamina ();
+			float maxhp = d.Max_HP ();
+			float maxstam = d.Max_Stamina ();
+			healthSlider.value = currhp / maxhp;
+			staminaSlider.value = currstam / maxstam;
+			healthText.text = ((int)currhp).ToString () + '/' + ((int)maxhp).ToString ();
+			staminaText.text = ((int)currstam).ToString () + '/' + ((int)maxstam).ToString ();
+		}
 	}
 }
 

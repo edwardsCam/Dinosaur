@@ -23,7 +23,6 @@ public class DinoController : MonoBehaviour
 	private bool hit_attack_key = false;
 	private bool attack_is_cooling_down = false;
 	private bool has_enemy_in_range;
-	private bool is_in_enemys_range;
 	private float attack_cooldown = 0.5f;
 	private float attack_timer = 0f;
 	#endregion
@@ -32,7 +31,7 @@ public class DinoController : MonoBehaviour
 	{
 		me = new Dinosaur ();
 		motor = GetComponent<CharacterMotor> ();
-		cam = GameObject.FindWithTag ("MainCamera").GetComponent<Camera>();
+		cam = GameObject.FindWithTag ("MainCamera").GetComponent<Camera> ();
 		normalFOV = cam.fieldOfView;
 
 		//******************
@@ -46,6 +45,14 @@ public class DinoController : MonoBehaviour
 
 		update_speed ();
 		update_visibility ();
+	}
+
+	// Update is called once per frame
+	void Update ()
+	{
+		GatherInput ();
+		UpdateGameLogic (Time.deltaTime);
+		Render ();
 	}
 
 	void GatherInput ()
@@ -80,15 +87,6 @@ public class DinoController : MonoBehaviour
 		if (zooming_enabled) {
 			cam.fieldOfView += zoomInc;
 		}
-	}
-
-	// Update is called once per frame
-	void Update ()
-	{
-		GatherInput ();
-		UpdateGameLogic (Time.deltaTime);
-		Render ();
-
 	}
 
 	#region Camera and Motor Update functions
@@ -147,7 +145,8 @@ public class DinoController : MonoBehaviour
 		} else if (nextZoomState == 0) {
 			zoomInc = delta * (normalFOV - minFOV) / zoomTime;
 		}
-		if ((zoomCount += delta) > zoomTime) {
+		zoomCount += delta;
+		if (zoomCount > zoomTime) {
 			resetZoom ();
 		}
 	}
@@ -183,22 +182,24 @@ public class DinoController : MonoBehaviour
 		if (!attack_is_cooling_down) {
 			int layer = 1;
 			layer <<= 8; //Dinosaur is layer 8
+			Dinosaur enemy = null;
 			Collider[] colliders = Physics.OverlapSphere (motor.transform.position, me.Attack_Radius (), layer);
 			foreach (Collider c in colliders) {
-				cameron_AI_Behavior enemy = c.GetComponent ("cameron_AI_Behavior") as cameron_AI_Behavior;
-				if (enemy != null) {
-					me.Attack (enemy.GetDinosaur ());
+				cameron_AI_Behavior ai_controller = c.GetComponent ("cameron_AI_Behavior") as cameron_AI_Behavior;
+				if (ai_controller != null) {
+					enemy = ai_controller.GetDinosaur ();
 					break;
 				}
 			}
+			me.Attack (enemy);
 			attack_is_cooling_down = true;
 		}
 	}
 
 	#endregion
 
-    public Dinosaur GetDinosaur()
-    {
-        return me;
-    }
+	public Dinosaur GetDinosaur ()
+	{
+		return me;
+	}
 }

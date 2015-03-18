@@ -31,9 +31,9 @@ namespace Attribute
 			return intel_bonus;
 		}
 
-		protected void AddPoints (float p, bool intel)
+		protected void AddPoints (float p, bool is_intel_bonus)
 		{
-			if (intel) {
+			if (is_intel_bonus) {
 				intel_bonus += p;
 			} else {
 				base_points += p;
