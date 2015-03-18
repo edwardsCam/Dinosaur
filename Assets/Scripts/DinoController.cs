@@ -196,4 +196,9 @@ public class DinoController : MonoBehaviour
 	}
 
 	#endregion
+
+    public Dinosaur GetDinosaur()
+    {
+        return me;
+    }
 }

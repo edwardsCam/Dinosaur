@@ -6,18 +6,18 @@ namespace Assets.Scripts.Utilities
 {
     public class GameSettings: MonoBehaviour
     {
-        public Dinosaur currentDino;
+        public DinosaurType currentDino;
 
         void Awake()
         {
             DontDestroyOnLoad(transform.gameObject);
         }
-        public Dinosaur GetCurrentDinosaur()
+        public DinosaurType GetCurrentDinosaur()
         {
             return currentDino;
         }
 
-        public void SetCurrentDinosaur(Dinosaur dino)
+        public void SetCurrentDinosaur(DinosaurType dino)
         {
             currentDino = dino;
         }
