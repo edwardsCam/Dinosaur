@@ -9,13 +9,13 @@ public class DinoSpawner : MonoBehaviour {
     public GameObject smallDino;
     public GameObject raptor;
 	// Use this for initialization
-	void Start () {
-        GameSettings settings = GameObject.FindGameObjectWithTag("Settings").GetComponent<GameSettings>();
-        SpawnDino(settings.GetCurrentDinosaur());
-
-        DestroySpawner();
-	
-	}
+//	void Start () {
+//        GameSettings settings = GameObject.FindGameObjectWithTag("Settings").GetComponent<GameSettings>();
+//        SpawnDino(settings.GetCurrentDinosaur());
+//
+//        DestroySpawner();
+//	
+//	}
 	
     private void DestroySpawner()
     {
@@ -25,18 +25,18 @@ public class DinoSpawner : MonoBehaviour {
     private void SpawnDino(Dinosaur dino)
     {
         //I know this is bad code but I'm using it as a hotfix.
-        if(dino == Dinosaur.TRex)
-        {
-            Spawn(tRex);
-        }
-        else if (dino == Dinosaur.Small)
-        {
-            Spawn(smallDino);
-        }
-        else if (dino == Dinosaur.Raptor)
-        {
-            Spawn(raptor);
-        }
+//        if(dino == Dinosaur.TRex)
+//        {
+//            Spawn(tRex);
+//        }
+//        else if (dino == Dinosaur.Small)
+//        {
+//            Spawn(smallDino);
+//        }
+//        else if (dino == Dinosaur.Raptor)
+//        {
+//            Spawn(raptor);
+//        }
     }
 
     private void Spawn(GameObject dino)
