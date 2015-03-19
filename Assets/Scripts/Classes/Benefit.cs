@@ -16,6 +16,14 @@ public class Benefit
 		extra = 0f;
 		can_multiply = _can_multiply;
 	}
+
+	public Benefit (float b, bool _can_multiply = true)
+	{
+		base_value = b;
+		modifier = 1.0f;
+		extra = 0f;
+		can_multiply = _can_multiply;
+	}
 	
 	#endregion
 	

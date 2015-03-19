@@ -3,8 +3,8 @@ using System.Xml.Linq;
 
 public class Dinosaur
 {
-	protected bool isAlive = true;
-
+	protected static int[] XP_levels = null;
+	protected bool isAlive;
 	protected Attribute.Strength strength;
 	protected Attribute.Agility agility;
 	protected Attribute.Energy energy;
@@ -12,11 +12,12 @@ public class Dinosaur
 	protected Attribute.Survivability survivability;
 	protected Attribute.Reproducibility reproducibility;
 	protected Attribute.Intelligence intelligence;
-
 	protected float current_hp;
 	protected float current_stamina;
 	protected Benefit attack_radius;
-
+	protected int total_xp;
+	protected int relative_xp;
+	protected int level;
 	public bool FLAG_movespeed_changed = false;
 	public bool FLAG_visibility_changed = false;
 
@@ -29,15 +30,34 @@ public class Dinosaur
 		survivability = new Attribute.Survivability ();
 		reproducibility = new Attribute.Reproducibility ();
 		intelligence = new Attribute.Intelligence ();
-		
+	
 		current_hp = strength.MaxHP ();
 		current_stamina = energy.MaxStamina ();
 		
-		attack_radius = new Benefit ();
-		attack_radius.SetBase (5); //TODO
+		attack_radius = new Benefit (5); //TODO
+
+		level = 1;
+		total_xp = 0;
+		relative_xp = 0;
+		
+		if (XP_levels == null) {
+			var doc = XDocument.Load ("documentation/xp.xml").Element ("xp");
+			int max_level = Convert.ToInt16 (doc.Element ("max_level").Value);
+			XP_levels = new int[max_level + 2];
+			for (int i = 1; i <= max_level; i++) {
+				int v = Convert.ToInt16 (doc.Element ("l_" + i).Value);
+				XP_levels [i] = v;
+				if (i == max_level) {
+					XP_levels [i + 1] = v;
+					XP_levels [i + 2] = v;
+				}
+			}
+		}
+
+		isAlive = true;
 	}
 
-	#region Actions
+	#region Attack and Damage actions
 
 	public void Attack (Dinosaur other)
 	{
@@ -55,6 +75,7 @@ public class Dinosaur
 	{
 		current_hp -= d;
 		if (current_hp <= 0) {
+			current_hp = 0;
 			Die ();
 		}
 	}
@@ -64,6 +85,10 @@ public class Dinosaur
 		//TODO
 		isAlive = false;
 	}
+
+	#endregion
+
+	#region Healing
 
 	public void Heal (float delta)
 	{
@@ -82,6 +107,27 @@ public class Dinosaur
 	{
 		current_stamina = Math.Min (current_stamina + stam, energy.MaxStamina ());
 	}
+
+	#endregion
+
+	#region XP actions
+
+	public void addXP (int xp)
+	{
+		total_xp += xp;
+		relative_xp += xp;
+		while (total_xp >= XP_levels[level + 1]) {
+			LevelUp ();
+		}
+	}
+
+	private void LevelUp ()
+	{
+		level++;
+		relative_xp -= (XP_levels [level] - XP_levels [level - 1]);
+	}
+
+
 
 	#endregion
 	
@@ -168,6 +214,13 @@ public class Dinosaur
 	#endregion
 	
 	#region Getters
+
+	#region Vitals
+
+	public int Current_Level ()
+	{
+		return level;
+	}
 	
 	public float Current_HP ()
 	{
@@ -179,6 +232,21 @@ public class Dinosaur
 		return current_stamina;
 	}
 
+	public int Current_XP ()
+	{
+		return relative_xp;
+	}
+
+	public int Total_XP ()
+	{
+		return total_xp;
+	}
+	
+	public int Next_XP_Goal ()
+	{
+		return XP_levels [level + 1] - XP_levels [level];
+	}
+
 	public float Attack_Radius ()
 	{
 		return attack_radius.Value ();
@@ -188,6 +256,8 @@ public class Dinosaur
 	{
 		return isAlive;
 	}
+
+	#endregion
 	
 	#region Strength
 	
