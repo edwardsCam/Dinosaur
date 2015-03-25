@@ -49,7 +49,6 @@ public class Dinosaur
 				XP_levels [i] = v;
 				if (i == max_level) {
 					XP_levels [i + 1] = v;
-					XP_levels [i + 2] = v;
 				}
 			}
 		}
