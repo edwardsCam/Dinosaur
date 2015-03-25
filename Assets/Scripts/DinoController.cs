@@ -194,7 +194,7 @@ public class DinoController : MonoBehaviour
 			Dinosaur enemy = null;
 			Collider[] colliders = Physics.OverlapSphere (motor.transform.position, me.Attack_Radius (), layer);
 			foreach (Collider c in colliders) {
-				cameron_AI_Behavior ai_controller = c.GetComponent ("cameron_AI_Behavior") as cameron_AI_Behavior;
+				BasicWalkingScript ai_controller = c.GetComponent ("BasicWalkingScript") as BasicWalkingScript;
 				if (ai_controller != null) {
 					enemy = ai_controller.GetDinosaur ();
 					break;

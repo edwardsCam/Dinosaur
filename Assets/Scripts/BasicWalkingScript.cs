@@ -1,30 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BasicWalkingScript : MonoBehaviour {
+public class BasicWalkingScript : MonoBehaviour
+{
 
 	private NavMeshAgent navAgent;
+	private Dinosaur me;
 
 	public float detectRadius;
 	public float stopDistance;
-	public Transform target;
+	public GameObject target = null;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
+		detectRadius = 1000; //TODO
 		navAgent = gameObject.GetComponent<NavMeshAgent> ();
-
+		me = new Species.Allosaurus ();
+		navAgent.speed = me.Movespeed ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 //		print (navAgent.destination);
 //		print (navAgent.remainingDistance);
 //		pritn (navAgent.
-		if (target == null) {
-			target = GameObject.FindGameObjectWithTag("Player").transform;
-		}
+		target = GetTarget ();
 
-		navAgent.destination = target.position;
+		navAgent.destination = target.transform.position;
+
+		if (target) {	
+			if (Vector3.Distance (gameObject.transform.position, target.transform.position) < me.Attack_Radius ()) {
+				DinoController player = target.GetComponent ("DinoController") as DinoController;
+				me.Attack (player.GetDinosaur ());
+			}
+		}		
 //		if (navAgent.remainingDistance > navAgent.stoppingDistance || double.IsInfinity(navAgent.remainingDistance) || navAgent.remainingDistance <= navAgent.stoppingDistance / 2) {
 //			print ("setting target");
 //		}
@@ -34,19 +45,19 @@ public class BasicWalkingScript : MonoBehaviour {
 //		}
 	}
 
-	protected void GetTarget() {
-//		Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, detectRadius);
-//		foreach (Collider otherObject in hitColliders) {
-//			if (otherObject.gameObject.name == "First Person Controller") {
-//				navAgent.ResetPath();
-//				Vector3 position = otherObject.gameObject.transform.position;
-//				if (Vector3.Distance(position, gameObject.transform.position) > navAgent.stoppingDistance) {
-//					NavMeshPath path = new NavMeshPath();
-//					navAgent.CalculatePath(position, path);
-//					navAgent.SetPath(path);
-//				}
-//				break;
-//			}
-//		}
+	protected GameObject GetTarget ()
+	{
+		Collider[] hitColliders = Physics.OverlapSphere (gameObject.transform.position, detectRadius);
+		foreach (Collider otherObject in hitColliders) {
+			if (otherObject.gameObject.tag == "Player") {
+				return otherObject.gameObject;
+			}
+		}
+		return null;
+	}
+	
+	public Dinosaur GetDinosaur ()
+	{
+		return me;
 	}
 }
