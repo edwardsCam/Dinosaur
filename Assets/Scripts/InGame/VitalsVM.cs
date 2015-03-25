@@ -44,8 +44,8 @@ public class VitalsVM : MonoBehaviour
 			healthSlider.value = currhp / maxhp;
 			staminaSlider.value = currstam / maxstam;
 			xpSlider.value = currxp / nextxp;
-			healthText.text = ((int)currhp).ToString () + "/" + ((int)maxhp).ToString () + (d.Current_HP () == d.Max_HP () ? "" : "  (+" + d.HP_Regen () + ")");
-			staminaText.text = ((int)currstam).ToString () + "/" + ((int)maxstam).ToString () + (d.Current_Stamina () == d.Max_Stamina () ? "" : "  (+" + d.Stamina_Regen () + ")");
+            healthText.text = ((int)currhp).ToString() + "/" + ((int)maxhp).ToString() + (currhp == maxhp ? "" : "  (+" + d.HP_Regen() + ")");
+            staminaText.text = ((int)currstam).ToString() + "/" + ((int)maxstam).ToString() + (currstam == maxstam ? "" : "  (+" + d.Stamina_Regen() + ")");
 			xpText.text = ((int)currxp).ToString () + "/" + ((int)nextxp).ToString ();
 		}
 	}
