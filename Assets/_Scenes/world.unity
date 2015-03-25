@@ -129,9 +129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec54ed090a4842fdb999e9ff6d55225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRadius: 0
-  stopDistance: 0
+  detectRadius: 1000
+  stopDistance: 10
   target: {fileID: 0}
+  attack_cooldown: .5
 --- !u!195 &57425806
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -768,6 +769,10 @@ Prefab:
     - target: {fileID: 400034, guid: 955710ac48fa0b440b4bb43b730022fd, type: 2}
       propertyPath: m_LocalScale.z
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100034, guid: 955710ac48fa0b440b4bb43b730022fd, type: 2}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 955710ac48fa0b440b4bb43b730022fd, type: 2}

@@ -34,7 +34,7 @@ public class Dinosaur
 		current_hp = strength.MaxHP ();
 		current_stamina = energy.MaxStamina ();
 		
-		attack_radius = new Benefit (5); //TODO
+		attack_radius = new Benefit (20); //TODO
 
 		level = 1;
 		total_xp = 0;
