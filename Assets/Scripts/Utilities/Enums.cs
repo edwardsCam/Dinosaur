@@ -17,5 +17,6 @@ namespace Assets.Scripts
 		Raptor,
 		Small,
 		TRex,
+        Allosaurus,
 	}
 }
