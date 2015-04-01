@@ -189,14 +189,13 @@ public class DinoController : MonoBehaviour
 	private void Attack ()
 	{
 		if (!attack_is_cooling_down) {
-			int layer = 1;
-			layer <<= 8; //Dinosaur is layer 8
+			int layer = 1 << 8; //Dinosaur is layer 8
 			Dinosaur enemy = null;
 			Collider[] colliders = Physics.OverlapSphere (motor.transform.position, me.Attack_Radius (), layer);
 			foreach (Collider c in colliders) {
-				BasicWalkingScript ai_controller = c.GetComponent ("BasicWalkingScript") as BasicWalkingScript;
-				if (ai_controller != null) {
-					enemy = ai_controller.GetDinosaur ();
+				var getter = gameObject.GetComponent<DinosaurObjectGetter> ();
+				if (getter != null) {
+					enemy = getter.dinosaur ();
 					break;
 				}
 			}

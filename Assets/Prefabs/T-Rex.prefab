@@ -30,7 +30,7 @@ GameObject:
   - 114: {fileID: 11485634}
   - 114: {fileID: 11485636}
   - 114: {fileID: 11409652}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: T-Rex
   m_TagString: Untagged
   m_Icon: {fileID: 0}

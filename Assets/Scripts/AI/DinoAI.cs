@@ -4,31 +4,31 @@ using Assets.Scripts.AI.Allosaurus;
 
 namespace Assets.Scripts.AI
 {
-    class DinoAI :MonoBehaviour
-    {
-        private IDecision intelligence;
-        public DinosaurType type;
-        GameObject target;
+	class DinoAI :MonoBehaviour
+	{
+		private IDecision intelligence;
+		GameObject target = null;
 
-        void Start()
-        {
-            if(type == DinosaurType.Allosaurus)
-            {
-                intelligence = new AllosaurusIdle();
-            }
+		void Start ()
+		{
+			switch (gameObject.GetComponent<DinosaurObjectGetter> ().type ()) {
 
-            target = null;
-        }
+			case DinosaurType.Allosaurus:
+				intelligence = new AllosaurusIdle ();
+				break;
+
+			}
+		}
         
-        void Update()
-        {
-            intelligence.Decide(gameObject, target);
-            intelligence.Act(gameObject, target);
-        }
+		void Update ()
+		{
+			intelligence.Decide (gameObject, target);
+			intelligence.Act (gameObject, target);
+		}
 
-        public void UpdateDecision(IDecision choice)
-        {
-            intelligence = choice;
-        }
-    }
+		public void UpdateDecision (IDecision choice)
+		{
+			intelligence = choice;
+		}
+	}
 }
