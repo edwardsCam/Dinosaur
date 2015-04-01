@@ -28,7 +28,7 @@ public class Attacking : MonoBehaviour
 				int layer = 1 << 8; //Dinosaur is layer 8
 				Collider[] colliders = Physics.OverlapSphere (gameObject.transform.position, me.Attack_Radius (), layer);
 				foreach (Collider c in colliders) {
-					var getter = gameObject.GetComponent<DinosaurObjectGetter> ();
+					var getter = c.gameObject.GetComponent<DinosaurObjectGetter> ();
 					if (getter != null) {
 						me.Attack (getter.dinosaur ());
 						attack_is_cooling_down = true;

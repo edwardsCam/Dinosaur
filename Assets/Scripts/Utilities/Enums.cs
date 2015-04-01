@@ -15,8 +15,7 @@ namespace Assets.Scripts
 	{
 		none,
 		Raptor,
-		Small,
 		TRex,
-        Allosaurus,
+		Allosaurus,
 	}
 }

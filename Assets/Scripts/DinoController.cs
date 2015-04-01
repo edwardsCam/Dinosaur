@@ -3,11 +3,11 @@ using System.Collections;
 
 public class DinoController : MonoBehaviour
 {
+	private bool PlayerControlled;
+
 	private Dinosaur me;
 	private CharacterMotor motor;
 	private Camera cam;
-
-	public Assets.Scripts.DinosaurType species;
 
 	#region Zoom Variables
 	private bool zooming_enabled = true;
@@ -31,20 +31,32 @@ public class DinoController : MonoBehaviour
 	
 	void Start ()
 	{
-		if (species == Assets.Scripts.DinosaurType.TRex) {
-			me = new Species.TRex ();
-		} else if (species == Assets.Scripts.DinosaurType.Raptor) {
-			me = new Species.Velociraptor ();
+		me = gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur ();
+		if (PlayerControlled) {
+			Disable_AI_Components ();
+			motor = GetComponentInChildren<CharacterMotor> ();
+			cam = GameObject.FindWithTag ("MainCamera").GetComponent<Camera> ();
+			normalFOV = cam.fieldOfView;
+			update_speed ();
+			update_visibility ();
 		} else {
-			me = new Dinosaur ();
+			Disable_Player_Components ();
 		}
+	}
 
-		motor = GetComponent<CharacterMotor> ();
-		cam = GameObject.FindWithTag ("MainCamera").GetComponent<Camera> ();
-		normalFOV = cam.fieldOfView;
+	void Disable_AI_Components ()
+	{
+		gameObject.GetComponent<Navigation> ().enabled = false;
+		gameObject.GetComponent<Attacking> ().enabled = false;
+	}
 
-		update_speed ();
-		update_visibility ();
+	void Disable_Player_Components ()
+	{
+		gameObject.GetComponent<MouseLook> ().enabled = false;
+		gameObject.GetComponent<CharacterMotor> ().enabled = false;
+		gameObject.GetComponent<FPSInputController> ().enabled = false;
+		gameObject.GetComponentInChildren<Camera> ().enabled = false;
+		gameObject.GetComponent<MouseLook> ().enabled = false;
 	}
 
 	// Update is called once per frame
@@ -73,7 +85,6 @@ public class DinoController : MonoBehaviour
 			update_visibility ();
 			me.FLAG_visibility_changed = false;
 		}
-
 		if (zooming_enabled && zooming) {
 			inc_zoom (delta);
 		}
@@ -117,27 +128,28 @@ public class DinoController : MonoBehaviour
 
 	#endregion
 
-	#region Zoom Functions 
+	#region Zoom Functions
 
 	void setZoomState ()
 	{
 		float scroll = Input.GetAxis ("Mouse ScrollWheel");
 		if (scroll != 0f) {
 			if (scroll > 0f) {
-				if (zoomState == 0) 
+				if (zoomState == 0) {
 					nextZoomState = 1;
-				else if (zoomState == -1) 
+				} else if (zoomState == -1) {
 					nextZoomState = 0;
+				}
 			} else {
-				if (zoomState == 0) 
+				if (zoomState == 0) {
 					nextZoomState = -1;
-				else if (zoomState == 1)
+				} else if (zoomState == 1) {
 					nextZoomState = 0;
+				}
 			}
 			zooming = true;
 		}
 	}
-
 
 	void inc_zoom (float delta)
 	{
@@ -166,13 +178,14 @@ public class DinoController : MonoBehaviour
 		zoomInc = 0f;
 		zooming = false;
 		zoomState = nextZoomState;
-		
-		if (zoomState == 1)
+
+		if (zoomState == 1) {
 			cam.fieldOfView = minFOV;
-		else if (zoomState == 0)
-			cam.fieldOfView = normalFOV;
-		else if (zoomState == -1)
+		} else if (zoomState == -1) {
 			cam.fieldOfView = maxFOV;
+		} else {
+			cam.fieldOfView = normalFOV;
+		}
 	}
 
 	#endregion
@@ -193,8 +206,8 @@ public class DinoController : MonoBehaviour
 			Dinosaur enemy = null;
 			Collider[] colliders = Physics.OverlapSphere (motor.transform.position, me.Attack_Radius (), layer);
 			foreach (Collider c in colliders) {
-				var getter = gameObject.GetComponent<DinosaurObjectGetter> ();
-				if (getter != null) {
+				var getter = c.gameObject.GetComponent<DinosaurObjectGetter> ();
+				if (getter != null && c.gameObject.tag != "Player") {
 					enemy = getter.dinosaur ();
 					break;
 				}
@@ -206,8 +219,8 @@ public class DinoController : MonoBehaviour
 
 	#endregion
 
-	public Dinosaur GetDinosaur ()
+	public void SpawnAsPlayer ()
 	{
-		return me;
+		PlayerControlled = true;
 	}
 }

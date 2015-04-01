@@ -1846,9 +1846,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7543ccb1186524348b14c964e3a598e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tRex: {fileID: 185636, guid: e2ca0b0b088e8ef46b6ffe8236c4df2e, type: 2}
-  smallDino: {fileID: 166652, guid: 71ff62ad64d5b12469dacf345b812d3f, type: 2}
-  raptor: {fileID: 121200, guid: 9ea3d367f175de543925987b03a43b4d, type: 2}
+  tRex: {fileID: 149172, guid: e2ca0b0b088e8ef46b6ffe8236c4df2e, type: 2}
+  raptor: {fileID: 121090, guid: 9ea3d367f175de543925987b03a43b4d, type: 2}
+  allosaurus: {fileID: 132286, guid: 2496439f82938b74dba49f245dc0a79d, type: 2}
 --- !u!4 &1264699706
 Transform:
   m_ObjectHideFlags: 0
@@ -3174,7 +3174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f9fdfbafe8c444ca5e6012e3d42b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  species: 4
+  species: 3
 --- !u!195 &1893704978
 NavMeshAgent:
   m_ObjectHideFlags: 0

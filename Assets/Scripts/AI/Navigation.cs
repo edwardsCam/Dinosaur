@@ -23,7 +23,6 @@ public class Navigation : MonoBehaviour
 	void Update ()
 	{
 		if (me.Is_Alive ()) {
-			float delta = Time.deltaTime;
 			target = GetTarget ();
 			if (target) {
 				navAgent.destination = target.transform.position;

@@ -8,7 +8,7 @@ public class DinosaurObjectGetter : MonoBehaviour
 	public Assets.Scripts.DinosaurType species;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
 		switch (species) {
 		case Assets.Scripts.DinosaurType.Raptor:
