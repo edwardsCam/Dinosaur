@@ -40,7 +40,7 @@ GameObject:
   - 195: {fileID: 19504666}
   m_Layer: 8
   m_Name: Raptor
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607098f7bae05b2429e5c532fa64f09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoomTime: .400000006
 --- !u!114 &11480168
 MonoBehaviour:
   m_ObjectHideFlags: 1
