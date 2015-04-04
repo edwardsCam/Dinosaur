@@ -26,8 +26,6 @@ public class VitalsVM : MonoBehaviour
 		healthText = healthBar.GetComponentInChildren<Text> ();
 		staminaText = staminaBar.GetComponentInChildren<Text> ();
 		xpText = xpBar.GetComponentInChildren<Text> ();
-		d = GameObject.FindGameObjectWithTag ("Player").GetComponent<DinosaurObjectGetter> ().dinosaur ();
-		ready = true;
 	}
 	
 	// Update is called once per frame
@@ -46,6 +44,12 @@ public class VitalsVM : MonoBehaviour
 			healthText.text = ((int)currhp).ToString () + "/" + ((int)maxhp).ToString () + (currhp == maxhp ? "" : "  (+" + d.HP_Regen () + ")");
 			staminaText.text = ((int)currstam).ToString () + "/" + ((int)maxstam).ToString () + (currstam == maxstam ? "" : "  (+" + d.Stamina_Regen () + ")");
 			xpText.text = ((int)currxp).ToString () + "/" + ((int)nextxp).ToString ();
+		} else {
+			var obj = GameObject.FindGameObjectWithTag ("Player");
+			if (obj != null) {
+				d = obj.GetComponent<DinosaurObjectGetter> ().dinosaur ();
+				ready = true;
+			}
 		}
 	}
 }

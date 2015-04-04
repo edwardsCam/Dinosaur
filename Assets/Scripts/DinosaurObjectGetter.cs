@@ -4,7 +4,7 @@ using System.Collections;
 public class DinosaurObjectGetter : MonoBehaviour
 {
 
-	private Dinosaur d;
+	private Dinosaur d = null;
 	public Assets.Scripts.DinosaurType species;
 
 	// Use this for initialization
@@ -19,6 +19,15 @@ public class DinosaurObjectGetter : MonoBehaviour
 			break;
 		case Assets.Scripts.DinosaurType.Allosaurus:
 			d = new Species.Allosaurus ();
+			break;
+		case Assets.Scripts.DinosaurType.Triceratops:
+			d = new Species.Triceratops ();
+			break;
+		case Assets.Scripts.DinosaurType.Spinosaurus:
+			d = new Species.Spinosaurus ();
+			break;
+		case Assets.Scripts.DinosaurType.Brachiosaurus:
+			d = new Species.Brachiosaurus ();
 			break;
 		}
 	}

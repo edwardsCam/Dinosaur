@@ -1849,6 +1849,9 @@ MonoBehaviour:
   tRex: {fileID: 149172, guid: e2ca0b0b088e8ef46b6ffe8236c4df2e, type: 2}
   raptor: {fileID: 121090, guid: 9ea3d367f175de543925987b03a43b4d, type: 2}
   allosaurus: {fileID: 132286, guid: 2496439f82938b74dba49f245dc0a79d, type: 2}
+  triceratops: {fileID: 110312, guid: 79d274f0bcff86b46a4d74eb98e5cc2d, type: 2}
+  spinosaurus: {fileID: 146400, guid: de7774cb6d65f3b4da3ada1212655314, type: 2}
+  brachiosaurus: {fileID: 195774, guid: f4d804394e5b9b04c8624f1dca7c92b4, type: 2}
 --- !u!4 &1264699706
 Transform:
   m_ObjectHideFlags: 0

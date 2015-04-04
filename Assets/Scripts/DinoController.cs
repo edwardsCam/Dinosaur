@@ -9,6 +9,8 @@ public class DinoController : MonoBehaviour
 	private CharacterMotor motor;
 	private Camera cam;
 
+	private bool ready = false;
+
 	#region Zoom Variables
 	private bool zooming_enabled = true;
 	public float zoomTime = 0.35f;
@@ -31,14 +33,11 @@ public class DinoController : MonoBehaviour
 	
 	void Start ()
 	{
-		me = gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur ();
 		if (PlayerControlled) {
 			Disable_AI_Components ();
 			motor = GetComponentInChildren<CharacterMotor> ();
 			cam = GameObject.FindWithTag ("MainCamera").GetComponent<Camera> ();
 			normalFOV = cam.fieldOfView;
-			update_speed ();
-			update_visibility ();
 		} else {
 			Disable_Player_Components ();
 		}
@@ -62,9 +61,18 @@ public class DinoController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		GatherInput ();
-		UpdateGameLogic (Time.deltaTime);
-		Render ();
+		if (!ready) {
+			if (gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur () != null) {
+				me = gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur ();
+				update_speed ();
+				update_visibility ();
+				ready = true;
+			}
+		} else {
+			GatherInput ();
+			UpdateGameLogic (Time.deltaTime);
+			Render ();
+		}
 	}
 
 	void GatherInput ()

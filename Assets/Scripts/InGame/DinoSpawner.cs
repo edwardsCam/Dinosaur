@@ -9,6 +9,9 @@ public class DinoSpawner : MonoBehaviour
 	public GameObject tRex;
 	public GameObject raptor;
 	public GameObject allosaurus;
+	public GameObject triceratops;
+	public GameObject spinosaurus;
+	public GameObject brachiosaurus;
 	// Use this for initialization
 	void Awake ()
 	{
@@ -31,13 +34,25 @@ public class DinoSpawner : MonoBehaviour
 
 	private void SpawnDino (DinosaurType dino)
 	{
-		//I know this is bad code but I'm using it as a hotfix.
-		if (dino == DinosaurType.TRex) {
+		switch (dino) {
+		case DinosaurType.TRex:
 			Spawn (tRex);
-		} else if (dino == DinosaurType.Raptor) {
+			break;
+		case DinosaurType.Raptor:
 			Spawn (raptor);
-		} else if (dino == DinosaurType.Allosaurus) {
+			break;
+		case DinosaurType.Allosaurus:
 			Spawn (allosaurus);
+			break;
+		case DinosaurType.Triceratops:
+			Spawn (triceratops);
+			break;
+		case DinosaurType.Spinosaurus:
+			Spawn (spinosaurus);
+			break;
+		case DinosaurType.Brachiosaurus:
+			Spawn (brachiosaurus);
+			break;
 		}
 	}
 
