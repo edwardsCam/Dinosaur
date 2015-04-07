@@ -30,5 +30,10 @@ namespace Assets.Scripts.AI
         {
             intelligence = choice;
         }
+
+        public void UpdateTarget(GameObject target)
+        {
+            this.target = target;
+        }
     }
 }
