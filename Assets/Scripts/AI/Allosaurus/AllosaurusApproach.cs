@@ -17,7 +17,7 @@ namespace Assets.Scripts.AI.Allosaurus
             {
                 if (Vector3.Distance(player.transform.position, self.transform.position) > 40)
                 {
-                    self.GetComponent<DinoAI>().UpdateDecision(new AllosaurusIdle());
+					self.GetComponent<AllosaurusAI>().UpdateDecision(self.GetComponent<AllosaurusAI>().getNextDecision());
                 }
             }
         }
