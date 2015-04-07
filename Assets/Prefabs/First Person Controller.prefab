@@ -331,8 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607098f7bae05b2429e5c532fa64f09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  species: 0
-  zoomTime: .349999994
+  zoomTime: .400000006
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

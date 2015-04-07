@@ -15,7 +15,7 @@ public class VitalsVM : MonoBehaviour
 	private Slider healthSlider;
 	private Slider staminaSlider;
 	private Slider xpSlider;
-	private DinoController dino_controller;
+	private Dinosaur d;
 	bool ready = false;
 	// Use this for initialization
 	public void Initialize ()
@@ -26,15 +26,12 @@ public class VitalsVM : MonoBehaviour
 		healthText = healthBar.GetComponentInChildren<Text> ();
 		staminaText = staminaBar.GetComponentInChildren<Text> ();
 		xpText = xpBar.GetComponentInChildren<Text> ();
-		dino_controller = GameObject.FindGameObjectWithTag ("Player").GetComponent<DinoController> ();
-		ready = true;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		if (ready) {
-			Dinosaur d = dino_controller.GetDinosaur ();
 			float currhp = d.Current_HP ();
 			float currstam = d.Current_Stamina ();
 			float maxhp = d.Max_HP ();
@@ -44,9 +41,15 @@ public class VitalsVM : MonoBehaviour
 			healthSlider.value = currhp / maxhp;
 			staminaSlider.value = currstam / maxstam;
 			xpSlider.value = currxp / nextxp;
-            healthText.text = ((int)currhp).ToString() + "/" + ((int)maxhp).ToString() + (currhp == maxhp ? "" : "  (+" + d.HP_Regen() + ")");
-            staminaText.text = ((int)currstam).ToString() + "/" + ((int)maxstam).ToString() + (currstam == maxstam ? "" : "  (+" + d.Stamina_Regen() + ")");
+			healthText.text = ((int)currhp).ToString () + "/" + ((int)maxhp).ToString () + (currhp == maxhp ? "" : "  (+" + d.HP_Regen () + ")");
+			staminaText.text = ((int)currstam).ToString () + "/" + ((int)maxstam).ToString () + (currstam == maxstam ? "" : "  (+" + d.Stamina_Regen () + ")");
 			xpText.text = ((int)currxp).ToString () + "/" + ((int)nextxp).ToString ();
+		} else {
+			var obj = GameObject.FindGameObjectWithTag ("Player");
+			if (obj != null) {
+				d = obj.GetComponent<DinosaurObjectGetter> ().dinosaur ();
+				ready = true;
+			}
 		}
 	}
 }

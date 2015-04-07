@@ -9,14 +9,16 @@ namespace Assets.Scripts
 	{
 		none,
 		Health,
-		Stamina,
+		Stamina
 	}
 	public enum DinosaurType
 	{
 		none,
 		Raptor,
-		Small,
 		TRex,
-        Allosaurus,
+		Allosaurus,
+		Triceratops,
+		Spinosaurus,
+		Brachiosaurus
 	}
 }
