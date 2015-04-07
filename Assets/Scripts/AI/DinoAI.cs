@@ -4,9 +4,9 @@ using Assets.Scripts.AI.Allosaurus;
 
 namespace Assets.Scripts.AI
 {
-	class DinoAI :MonoBehaviour
+	class DinoAI : MonoBehaviour
 	{
-		private IDecision intelligence;
+		protected IDecision intelligence;
 		GameObject target = null;
 
 		void Start ()
@@ -29,6 +29,11 @@ namespace Assets.Scripts.AI
 		public void UpdateDecision (IDecision choice)
 		{
 			intelligence = choice;
+		}
+
+		public IDecision getNextDecision()
+		{
+			return null;
 		}
 	}
 }
