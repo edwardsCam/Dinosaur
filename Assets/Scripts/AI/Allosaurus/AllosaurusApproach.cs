@@ -28,7 +28,7 @@ namespace Assets.Scripts.AI.Allosaurus
 			AllosaurusAI dino = self.GetComponent<AllosaurusAI>();
             ani.Play("Allosaurus_Walk");
 			if (dino.getDinosaur().Is_Alive ()) {
-				target = dino.GetTarget ();
+				target = dino.GetNewTarget ();
 				if (target) {
 					dino.getNavAgent().destination = target.transform.position;
 				}
