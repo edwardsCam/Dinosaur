@@ -171,7 +171,7 @@ public class CharacterMotor : MonoBehaviour
         if (movingPlatform.enabled) {
             if (movingPlatform.activePlatform != null) {
                 if (!movingPlatform.newPlatform) {
-                    Vector3 lastVelocity = movingPlatform.platformVelocity;
+//                    Vector3 lastVelocity = movingPlatform.platformVelocity;
     			
                     movingPlatform.platformVelocity = (
                         movingPlatform.activePlatform.localToWorldMatrix.MultiplyPoint3x4(movingPlatform.activeLocalPoint)
@@ -341,7 +341,7 @@ public class CharacterMotor : MonoBehaviour
            // If we landed on a new platform, we have to wait for two FixedUpdates
            // before we know the velocity of the platform under the character
            if (movingPlatform.newPlatform) {
-               Transform platform = movingPlatform.activePlatform;
+//               Transform platform = movingPlatform.activePlatform;
                //yield return WaitForFixedUpdate();
                 //WaitForFixedUpdate();
                //if (grounded && platform == movingPlatform.activePlatform) 

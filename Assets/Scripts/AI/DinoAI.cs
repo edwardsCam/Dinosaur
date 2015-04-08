@@ -9,7 +9,7 @@ namespace Assets.Scripts.AI
 		protected IDecision intelligence;
 		GameObject target = null;
 
-		void Start ()
+		public void Start ()
 		{
 			switch (gameObject.GetComponent<DinosaurObjectGetter> ().type ()) {
 

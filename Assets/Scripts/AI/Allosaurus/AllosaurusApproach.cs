@@ -25,7 +25,14 @@ namespace Assets.Scripts.AI.Allosaurus
         public void Act(GameObject self, GameObject target)
         {
             Animation ani = self.GetComponent<Animation>();
+			AllosaurusAI dino = self.GetComponent<AllosaurusAI>();
             ani.Play("Allosaurus_Walk");
+			if (dino.getDinosaur().Is_Alive ()) {
+				target = dino.GetTarget ();
+				if (target) {
+					dino.getNavAgent().destination = target.transform.position;
+				}
+			}
         }
     }
 }
