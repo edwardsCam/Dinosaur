@@ -65,6 +65,10 @@ public class Dinosaur
 			if (other != null) {
 				float damage = strength.CombatStrength ();
 				other.TakeDamage (damage);
+				if (!other.Is_Alive ()) {
+					UnityEngine.Debug.Log ("Killed " + other);
+					addXP (30); //TODO
+				}
 			}
 			current_stamina -= expend;
 		}

@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370bad69a31d62b4f945cbaab094351d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDino: 1
+  currentDino: 3
 --- !u!1 &867367468
 GameObject:
   m_ObjectHideFlags: 0

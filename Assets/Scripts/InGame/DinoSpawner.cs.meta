@@ -1,8 +1,18 @@
 fileFormatVersion: 2
 guid: 7543ccb1186524348b14c964e3a598e1
+timeCreated: 1428460631
+licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - tRex: {fileID: 149172, guid: e2ca0b0b088e8ef46b6ffe8236c4df2e, type: 2}
+  - raptor: {fileID: 121090, guid: 9ea3d367f175de543925987b03a43b4d, type: 2}
+  - allosaurus: {fileID: 192540, guid: 2496439f82938b74dba49f245dc0a79d, type: 2}
+  - triceratops: {fileID: 110312, guid: 79d274f0bcff86b46a4d74eb98e5cc2d, type: 2}
+  - spinosaurus: {fileID: 146400, guid: de7774cb6d65f3b4da3ada1212655314, type: 2}
+  - brachiosaurus: {fileID: 195774, guid: f4d804394e5b9b04c8624f1dca7c92b4, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

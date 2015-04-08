@@ -10,7 +10,7 @@ namespace Assets.Scripts.AI
 		protected NavMeshAgent navAgent;
 		protected Dinosaur me;
 		
-		public float detectRadius = 1000;
+		public float detectRadius = 50;
 		public float stopDistance = 10;
 		protected GameObject curTarget = null;
 
@@ -34,8 +34,12 @@ namespace Assets.Scripts.AI
         
 		void Update ()
 		{
-			intelligence.Decide (gameObject, target);
-			intelligence.Act (gameObject, target);
+			if (me.Is_Alive ()) {
+				intelligence.Decide (gameObject, target);
+				intelligence.Act (gameObject, target);
+			} else {
+				Destroy (gameObject);
+			}
 		}
 
 		public void UpdateDecision (IDecision choice)
@@ -43,7 +47,7 @@ namespace Assets.Scripts.AI
 			intelligence = choice;
 		}
 
-		public IDecision getNextDecision()
+		public IDecision getNextDecision ()
 		{
 			return null;
 		}
@@ -51,7 +55,8 @@ namespace Assets.Scripts.AI
 
 		public GameObject GetNewTarget ()
 		{
-			Collider[] hitColliders = Physics.OverlapSphere (gameObject.transform.position, detectRadius);
+			int layer = 1 << 8;
+			Collider[] hitColliders = Physics.OverlapSphere (gameObject.transform.position, detectRadius, layer);
 			foreach (Collider otherObject in hitColliders) {
 				if (otherObject.gameObject.tag == "Player") {
 					return otherObject.gameObject;
@@ -60,19 +65,23 @@ namespace Assets.Scripts.AI
 			return null;
 		}
 
-		public Dinosaur getDinosaur () {
+		public Dinosaur getDinosaur ()
+		{
 			return me;
 		}
 
-		public NavMeshAgent getNavAgent () {
+		public NavMeshAgent getNavAgent ()
+		{
 			return navAgent;
 		}
 
-		public void setTarget(GameObject newTarget) {
+		public void setTarget (GameObject newTarget)
+		{
 			curTarget = newTarget;
 		}
 
-		public GameObject getTarget() {
+		public GameObject getTarget ()
+		{
 			return curTarget;
 		}
 	}

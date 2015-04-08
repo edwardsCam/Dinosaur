@@ -36,7 +36,7 @@ public class DinoController : MonoBehaviour
 		if (PlayerControlled) {
 			Disable_AI_Components ();
 			motor = GetComponentInChildren<CharacterMotor> ();
-			cam = GameObject.FindWithTag ("MainCamera").GetComponent<Camera> ();
+			cam = gameObject.GetComponentInChildren<Camera> ();
 			normalFOV = cam.fieldOfView;
 		} else {
 			Disable_Player_Components ();
@@ -45,8 +45,14 @@ public class DinoController : MonoBehaviour
 
 	void Disable_AI_Components ()
 	{
-		gameObject.GetComponent<Navigation> ().enabled = false;
+		if (gameObject.GetComponent<Navigation> () != null) {
+			gameObject.GetComponent<Navigation> ().enabled = false;
+		}
 		gameObject.GetComponent<Attacking> ().enabled = false;
+
+		if (gameObject.GetComponent<Assets.Scripts.AI.Allosaurus.AllosaurusAI> () != null) {
+			gameObject.GetComponent<Assets.Scripts.AI.Allosaurus.AllosaurusAI> ().enabled = false;
+		}
 	}
 
 	void Disable_Player_Components ()
@@ -55,6 +61,7 @@ public class DinoController : MonoBehaviour
 		gameObject.GetComponent<CharacterMotor> ().enabled = false;
 		gameObject.GetComponent<FPSInputController> ().enabled = false;
 		gameObject.GetComponentInChildren<Camera> ().enabled = false;
+		gameObject.GetComponentInChildren<AudioListener> ().enabled = false;
 		gameObject.GetComponent<MouseLook> ().enabled = false;
 	}
 
@@ -112,7 +119,7 @@ public class DinoController : MonoBehaviour
 
 	void Render ()
 	{
-		if (zooming_enabled) {
+		if (PlayerControlled && zooming_enabled && zooming) {
 			cam.fieldOfView += zoomInc;
 		}
 	}
@@ -121,17 +128,21 @@ public class DinoController : MonoBehaviour
 
 	void update_speed ()
 	{
-		float speed = me.Movespeed ();
-		motor.movement.maxForwardSpeed = speed;
-		motor.movement.maxSidewaysSpeed = speed * 0.85f;
-		motor.movement.maxBackwardsSpeed = speed * 0.75f;
+		if (PlayerControlled) {
+			float speed = me.Movespeed ();
+			motor.movement.maxForwardSpeed = speed;
+			motor.movement.maxSidewaysSpeed = speed * 0.85f;
+			motor.movement.maxBackwardsSpeed = speed * 0.75f;
+		}
 	}
 
 	void update_visibility ()
 	{
-		minFOV = me.MinFieldOfView ();
-		maxFOV = me.MaxFieldOfView ();
-		cam.farClipPlane = me.VisibilityDistance ();
+		if (PlayerControlled) {
+			minFOV = me.MinFieldOfView ();
+			maxFOV = me.MaxFieldOfView ();
+			cam.farClipPlane = me.VisibilityDistance ();
+		}
 	}
 
 	#endregion
@@ -187,12 +198,14 @@ public class DinoController : MonoBehaviour
 		zooming = false;
 		zoomState = nextZoomState;
 
-		if (zoomState == 1) {
-			cam.fieldOfView = minFOV;
-		} else if (zoomState == -1) {
-			cam.fieldOfView = maxFOV;
-		} else {
-			cam.fieldOfView = normalFOV;
+		if (PlayerControlled) {
+			if (zoomState == 1) {
+				cam.fieldOfView = minFOV;
+			} else if (zoomState == -1) {
+				cam.fieldOfView = maxFOV;
+			} else {
+				cam.fieldOfView = normalFOV;
+			}
 		}
 	}
 
@@ -212,7 +225,7 @@ public class DinoController : MonoBehaviour
 		if (!attack_is_cooling_down) {
 			int layer = 1 << 8; //Dinosaur is layer 8
 			Dinosaur enemy = null;
-			Collider[] colliders = Physics.OverlapSphere (motor.transform.position, me.Attack_Radius (), layer);
+			Collider[] colliders = Physics.OverlapSphere (gameObject.transform.position, me.Attack_Radius (), layer);
 			foreach (Collider c in colliders) {
 				var getter = c.gameObject.GetComponent<DinosaurObjectGetter> ();
 				if (getter != null && c.gameObject.tag != "Player") {

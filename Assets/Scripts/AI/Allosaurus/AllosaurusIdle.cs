@@ -11,18 +11,21 @@ namespace Assets.Scripts.AI.Allosaurus
 
 		public void Decide (GameObject self, GameObject target)
 		{
-			GameObject player = GameObject.FindGameObjectWithTag ("Player");
-
-			if (player != null) {
-				if (Vector3.Distance (player.transform.position, self.transform.position) < 40) {
-					self.GetComponent<DinoAI> ().UpdateDecision (self.GetComponent<AllosaurusAI>().getNextDecision());
+			int layer = 1 << 8;
+			Collider[] hitColliders = Physics.OverlapSphere (self.transform.position, self.GetComponent<AllosaurusAI> ().detectRadius, layer);
+			foreach (Collider otherObject in hitColliders) {
+				if (otherObject.gameObject.tag == "Player") {
+					self.GetComponent<DinoAI> ().UpdateDecision (self.GetComponent<AllosaurusAI> ().getNextDecision ());
 				}
 			}
 		}
 
 		public void Act (GameObject self, GameObject target)
 		{
-			Animation ani = self.GetComponent<Animation> ();
+			AllosaurusAI dino = self.GetComponent<AllosaurusAI> ();
+			dino.getNavAgent ().destination = self.transform.position;
+
+			Animation ani = self.GetComponentInChildren<Animation> ();
 			ani.Play ("Allosaurus_Idle");
 		}
 	}
