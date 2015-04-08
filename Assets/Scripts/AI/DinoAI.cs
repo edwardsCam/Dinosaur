@@ -4,7 +4,7 @@ using Assets.Scripts.AI.Allosaurus;
 
 namespace Assets.Scripts.AI
 {
-	class DinoAI : MonoBehaviour
+	abstract class DinoAI : MonoBehaviour
 	{
 
 		protected NavMeshAgent navAgent;
@@ -25,11 +25,14 @@ namespace Assets.Scripts.AI
 				intelligence = new AllosaurusIdle ();
 				break;
 
+			//TODO more AI's!
+
 			}
 
 			navAgent = gameObject.GetComponent<NavMeshAgent> ();
 			me = gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur ();
 			navAgent.speed = me.Movespeed ();
+			navAgent.stoppingDistance = me.Attack_Radius ();
 		}
         
 		void Update ()
@@ -40,15 +43,13 @@ namespace Assets.Scripts.AI
 			}
 		}
 
-		public void UpdateDecision (IDecision choice)
+		public void UpdateDecision ()
 		{
-			intelligence = choice;
+			intelligence = getNextDecision ();
 		}
 
-		public IDecision getNextDecision ()
-		{
-			return null;
-		}
+		protected abstract IDecision getNextDecision ();
+		protected abstract IDecision defaultDecision ();
 
 
 		public GameObject GetNewTarget ()
@@ -56,7 +57,7 @@ namespace Assets.Scripts.AI
 			int layer = 1 << 8;
 			Collider[] hitColliders = Physics.OverlapSphere (gameObject.transform.position, detectRadius, layer);
 			foreach (Collider otherObject in hitColliders) {
-				if (otherObject.gameObject.tag == "Player") {
+				if (otherObject.gameObject != gameObject) {
 					return otherObject.gameObject;
 				}
 			}

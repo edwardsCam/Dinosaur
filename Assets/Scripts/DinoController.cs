@@ -33,14 +33,26 @@ public class DinoController : MonoBehaviour
 	#endregion
 
 	private float death_timer = 0f;
-
-	public bool animations_implemented;
+	private int carcass_time = 10;
+	private bool animations_implemented = false;
 	
 	void Start ()
 	{
-		if (animations_implemented) {
+		{
 			ani = gameObject.GetComponentInChildren<Animation> ();
+			if (ani != null) {
+				//Make sure all the anims that we use are implemented.
+				animations_implemented = 
+					ani ["Attack01"] != null && 
+					ani ["Attack01"] != null && 
+					ani ["Idle"] != null &&
+					ani ["Walk"] != null && 
+					ani ["Die"] != null;
+			}
+		}
+		if (animations_implemented) {
 			ani ["Attack01"].wrapMode = WrapMode.Once;
+			ani ["Attack02"].wrapMode = WrapMode.Once;
 		}
 		if (PlayerControlled) {
 			Disable_AI_Components ();
@@ -77,6 +89,7 @@ public class DinoController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		float delta = Time.deltaTime;
 		if (!ready) {
 			Dinosaur d = gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur ();
 			if (d != null) {
@@ -87,13 +100,14 @@ public class DinoController : MonoBehaviour
 			}
 		} else if (me.Is_Alive ()) {
 			GatherInput ();
-			UpdateGameLogic (Time.deltaTime);
+			UpdateGameLogic (delta);
 			Render ();
 		} else if (animations_implemented) {
-			death_timer += Time.deltaTime;
-			if (death_timer < ani ["Die"].length) {
+			float ani_length = ani ["Die"].length;
+			death_timer += delta;
+			if (death_timer < ani_length) {
 				ani.Play ("Die");
-			} else if (death_timer > ani ["Die"].length + 5) {
+			} else if (death_timer > ani_length + carcass_time) {
 				Destroy_Dino ();
 			}
 		} else {
@@ -147,7 +161,7 @@ public class DinoController : MonoBehaviour
 				cam.fieldOfView += zoomInc;
 			}
 			if (animations_implemented) {
-				if (!ani.IsPlaying ("Attack01")) {
+				if (!ani.IsPlaying ("Attack01") && !ani.IsPlaying ("Attack02")) {
 					if (motor.movement.velocity.magnitude == 0f) {
 						ani.Play ("Idle");
 					} else {
@@ -275,7 +289,7 @@ public class DinoController : MonoBehaviour
 			me.Attack (enemy);
 			attack_is_cooling_down = true;
 			if (animations_implemented) {
-				ani.Play ("Attack01");
+				ani.Play ("Attack0" + (Random.Range (0, 2) + 1).ToString ());
 			}
 		}
 	}

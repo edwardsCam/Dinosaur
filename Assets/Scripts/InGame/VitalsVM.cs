@@ -9,6 +9,7 @@ public class VitalsVM : MonoBehaviour
 	public GameObject healthBar;
 	public GameObject staminaBar;
 	public GameObject xpBar;
+	public Text levelText;
 	private Text healthText;
 	private Text staminaText;
 	private Text xpText;
@@ -41,9 +42,14 @@ public class VitalsVM : MonoBehaviour
 			healthSlider.value = currhp / maxhp;
 			staminaSlider.value = currstam / maxstam;
 			xpSlider.value = currxp / nextxp;
-			healthText.text = ((int)currhp).ToString () + "/" + ((int)maxhp).ToString () + (currhp == maxhp ? "" : "  (+" + d.HP_Regen () + ")");
-			staminaText.text = ((int)currstam).ToString () + "/" + ((int)maxstam).ToString () + (currstam == maxstam ? "" : "  (+" + d.Stamina_Regen () + ")");
-			xpText.text = ((int)currxp).ToString () + "/" + ((int)nextxp).ToString ();
+			healthText.text = ((int)currhp).ToString () + "/" + ((int)maxhp).ToString () + (currhp == maxhp ? "" : "  (+" + d.HP_Regen ().ToString ("F2") + ")");
+			staminaText.text = ((int)currstam).ToString () + "/" + ((int)maxstam).ToString () + (currstam == maxstam ? "" : "  (+" + d.Stamina_Regen ().ToString ("F2") + ")");
+			if (d.isAtMaxLevel ()) {
+				xpText.text = "MAX LEVEL";
+			} else {
+				xpText.text = ((int)currxp).ToString () + "/" + ((int)nextxp).ToString ();
+			}
+			levelText.text = "Level " + d.Current_Level ();
 		} else {
 			var obj = GameObject.FindGameObjectWithTag ("Player");
 			if (obj != null) {

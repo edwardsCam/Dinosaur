@@ -9,17 +9,22 @@ namespace Assets.Scripts.AI.Allosaurus
 	class AllosaurusAI : DinoAI
 	{
 		
-		public new IDecision getNextDecision()
+		protected override IDecision getNextDecision ()
 		{
 			if (intelligence == null) {
-				return new AllosaurusIdle ();
+				return defaultDecision ();
 			} else if (intelligence is AllosaurusIdle) {
 				return new AllosaurusApproach ();
 			} else if (intelligence is AllosaurusApproach) {
-				return new AllosaurusIdle ();
+				return defaultDecision ();
 			} else {
-				return base.getNextDecision ();
+				return defaultDecision ();
 			}
+		}
+
+		protected override IDecision defaultDecision ()
+		{
+			return new AllosaurusIdle ();
 		}
 	}
 }

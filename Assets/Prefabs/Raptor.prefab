@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec54ed090a4842fdb999e9ff6d55225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectRadius: 1000
+  detectRadius: 50
   stopDistance: 10
 --- !u!114 &11474568
 MonoBehaviour:

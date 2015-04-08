@@ -111,8 +111,9 @@ static class Calculate
 	
 	public static float _hpRegen (float points)
 	{
-		//TODO
-		return 1.0f;
+		//1  point  -> 0.2
+		//10 points -> 1.0
+		return 0.1111f + 0.0889f * points;
 	}
 	
 	public static float _extraFoodBenefit (float points)

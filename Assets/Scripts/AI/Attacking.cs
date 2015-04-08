@@ -35,7 +35,9 @@ public class Attacking : MonoBehaviour
 							if (enemy != null && enemy.Is_Alive ()) {
 								if (me.Attack (enemy)) {
 									attack_is_cooling_down = true;
-									gameObject.GetComponentInChildren<Animation> ().Play ("Attack01");
+									if (gameObject.GetComponentInChildren<Animation> () != null) {
+										gameObject.GetComponentInChildren<Animation> ().Play ("Attack0" + (Random.Range (0, 2) + 1).ToString ());
+									}
 									break;
 								}
 							}

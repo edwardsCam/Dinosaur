@@ -11,12 +11,17 @@ namespace Assets.Scripts.AI.Allosaurus
 
 		public void Decide (GameObject self, GameObject target)
 		{
+			AllosaurusAI dino = self.GetComponent<AllosaurusAI> ();
+			bool found_other = false;
 			int layer = 1 << 8;
-			Collider[] hitColliders = Physics.OverlapSphere (self.transform.position, self.GetComponent<AllosaurusAI> ().detectRadius, layer);
+			Collider[] hitColliders = Physics.OverlapSphere (self.transform.position, dino.detectRadius, layer);
 			foreach (Collider otherObject in hitColliders) {
-				if (otherObject.gameObject.tag == "Player") {
-					self.GetComponent<DinoAI> ().UpdateDecision (self.GetComponent<AllosaurusAI> ().getNextDecision ());
+				if (otherObject.gameObject != self) {
+					found_other = true;
 				}
+			}
+			if (found_other) {
+				dino.UpdateDecision ();
 			}
 		}
 
@@ -26,7 +31,7 @@ namespace Assets.Scripts.AI.Allosaurus
 			dino.getNavAgent ().destination = self.transform.position;
 
 			Animation ani = self.GetComponentInChildren<Animation> ();
-			if (!ani.IsPlaying ("Attack01")) {
+			if (!ani.IsPlaying ("Attack01") && !ani.IsPlaying ("Attack02")) {
 				ani.Play ("Idle");
 			}
 		}
