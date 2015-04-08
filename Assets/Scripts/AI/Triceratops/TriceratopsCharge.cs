@@ -11,11 +11,12 @@ namespace Assets.Scripts.AI.Triceratops
 
         Vector3 chargeLocation;
         NavMeshAgent navAgent;
-        float detectRadius = 10;
+        float detectRadius = 30;
         public TriceratopsCharge(GameObject self, GameObject target)
         {
             chargeLocation = target.transform.position;
             navAgent = self.GetComponent<NavMeshAgent>();
+            Debug.Log("Charging");
         }
         public void Decide(UnityEngine.GameObject self, UnityEngine.GameObject target)
         {
@@ -53,6 +54,7 @@ namespace Assets.Scripts.AI.Triceratops
                 navAgent.CalculatePath(chargeLocation, path);
                 navAgent.SetPath(path);
             }
+            self.GetComponent<Animation>().PlayQueued("Allosaurus_Run");
         }
     }
 }

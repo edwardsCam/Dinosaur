@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Scripts.AI.Allosaurus;
+using Assets.Scripts.AI.Triceratops;
 
 namespace Assets.Scripts.AI
 {
@@ -15,6 +16,10 @@ namespace Assets.Scripts.AI
             if(type == DinosaurType.Allosaurus)
             {
                 intelligence = new AllosaurusIdle();
+            }
+            else if(type == DinosaurType.Triceratops)
+            {
+                intelligence = new TriceratopsIdle();
             }
 
             target = null;

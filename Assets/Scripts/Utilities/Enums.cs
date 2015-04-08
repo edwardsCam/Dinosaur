@@ -11,12 +11,13 @@ namespace Assets.Scripts
 		Health,
 		Stamina,
 	}
-	public enum DinosaurType
-	{
-		none,
-		Raptor,
-		Small,
-		TRex,
+    public enum DinosaurType
+    {
+        none,
+        Raptor,
+        Small,
+        TRex,
         Allosaurus,
-	}
+        Triceratops,
+    }
 }
