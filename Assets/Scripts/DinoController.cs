@@ -10,6 +10,7 @@ public class DinoController : MonoBehaviour
 	private Camera cam;
 
 	private bool ready = false;
+	private Animation ani;
 
 	#region Zoom Variables
 	private bool zooming_enabled = true;
@@ -30,12 +31,20 @@ public class DinoController : MonoBehaviour
 	private float attack_cooldown = 0.5f;
 	private float attack_timer = 0f;
 	#endregion
+
+	private float death_timer = 0f;
+
+	public bool animations_implemented;
 	
 	void Start ()
 	{
+		if (animations_implemented) {
+			ani = gameObject.GetComponentInChildren<Animation> ();
+			ani ["Attack01"].wrapMode = WrapMode.Once;
+		}
 		if (PlayerControlled) {
 			Disable_AI_Components ();
-			motor = GetComponentInChildren<CharacterMotor> ();
+			motor = gameObject.GetComponentInChildren<CharacterMotor> ();
 			cam = gameObject.GetComponentInChildren<Camera> ();
 			normalFOV = cam.fieldOfView;
 		} else {
@@ -69,25 +78,37 @@ public class DinoController : MonoBehaviour
 	void Update ()
 	{
 		if (!ready) {
-			if (gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur () != null) {
-				me = gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur ();
+			Dinosaur d = gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur ();
+			if (d != null) {
+				me = d;
 				update_speed ();
 				update_visibility ();
 				ready = true;
 			}
-		} else {
+		} else if (me.Is_Alive ()) {
 			GatherInput ();
 			UpdateGameLogic (Time.deltaTime);
 			Render ();
+		} else if (animations_implemented) {
+			death_timer += Time.deltaTime;
+			if (death_timer < ani ["Die"].length) {
+				ani.Play ("Die");
+			} else if (death_timer > ani ["Die"].length + 5) {
+				Destroy_Dino ();
+			}
+		} else {
+			Destroy_Dino ();
 		}
 	}
 
 	void GatherInput ()
 	{
-		if (zooming_enabled && !zooming) {
-			setZoomState ();
+		if (PlayerControlled) {
+			if (zooming_enabled && !zooming) {
+				setZoomState ();
+			}
+			checkForAttack ();
 		}
-		checkForAttack ();
 	}
 
 	void UpdateGameLogic (float delta)
@@ -100,18 +121,20 @@ public class DinoController : MonoBehaviour
 			update_visibility ();
 			me.FLAG_visibility_changed = false;
 		}
-		if (zooming_enabled && zooming) {
-			inc_zoom (delta);
-		}
-		if (hit_attack_key) {
-			hit_attack_key = false;
-			Attack ();
-		}
-		if (attack_is_cooling_down) {
-			attack_timer += delta;
-			if (attack_timer > attack_cooldown) {
-				attack_timer = 0f;
-				attack_is_cooling_down = false;
+		if (PlayerControlled) {
+			if (zooming_enabled && zooming) {
+				inc_zoom (delta);
+			}
+			if (hit_attack_key) {
+				hit_attack_key = false;
+				Attack ();
+			}
+			if (attack_is_cooling_down) {
+				attack_timer += delta;
+				if (attack_timer > attack_cooldown) {
+					attack_timer = 0f;
+					attack_is_cooling_down = false;
+				}
 			}
 		}
 		me.Heal (delta);
@@ -119,9 +142,27 @@ public class DinoController : MonoBehaviour
 
 	void Render ()
 	{
-		if (PlayerControlled && zooming_enabled && zooming) {
-			cam.fieldOfView += zoomInc;
+		if (PlayerControlled) {
+			if (zooming_enabled && zooming) {
+				cam.fieldOfView += zoomInc;
+			}
+			if (animations_implemented) {
+				if (!ani.IsPlaying ("Attack01")) {
+					if (motor.movement.velocity.magnitude == 0f) {
+						ani.Play ("Idle");
+					} else {
+						ani.Play ("Walk");
+					}
+				}
+			}
 		}
+	}
+
+	private void Destroy_Dino ()
+	{
+		Destroy (gameObject);
+
+		// anything else??
 	}
 
 	#region Camera and Motor Update functions
@@ -197,15 +238,13 @@ public class DinoController : MonoBehaviour
 		zoomInc = 0f;
 		zooming = false;
 		zoomState = nextZoomState;
-
-		if (PlayerControlled) {
-			if (zoomState == 1) {
-				cam.fieldOfView = minFOV;
-			} else if (zoomState == -1) {
-				cam.fieldOfView = maxFOV;
-			} else {
-				cam.fieldOfView = normalFOV;
-			}
+		
+		if (zoomState == 1) {
+			cam.fieldOfView = minFOV;
+		} else if (zoomState == -1) {
+			cam.fieldOfView = maxFOV;
+		} else {
+			cam.fieldOfView = normalFOV;
 		}
 	}
 
@@ -228,13 +267,16 @@ public class DinoController : MonoBehaviour
 			Collider[] colliders = Physics.OverlapSphere (gameObject.transform.position, me.Attack_Radius (), layer);
 			foreach (Collider c in colliders) {
 				var getter = c.gameObject.GetComponent<DinosaurObjectGetter> ();
-				if (getter != null && c.gameObject.tag != "Player") {
+				if (getter != null && c.gameObject.tag != "Player" && getter.dinosaur ().Is_Alive ()) {
 					enemy = getter.dinosaur ();
 					break;
 				}
 			}
 			me.Attack (enemy);
 			attack_is_cooling_down = true;
+			if (animations_implemented) {
+				ani.Play ("Attack01");
+			}
 		}
 	}
 

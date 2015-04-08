@@ -29,7 +29,9 @@ namespace Assets.Scripts.AI.Allosaurus
 		{
 			Animation ani = self.GetComponentInChildren<Animation> ();
 			AllosaurusAI dino = self.GetComponent<AllosaurusAI> ();
-			ani.Play ("Allosaurus_Walk");
+			if (!ani.IsPlaying ("Attack01")) {
+				ani.Play ("Walk");
+			}
 			if (dino.getDinosaur ().Is_Alive ()) {
 				target = dino.GetNewTarget ();
 				if (target) {

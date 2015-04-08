@@ -32,10 +32,12 @@ public class Attacking : MonoBehaviour
 						var getter = c.gameObject.GetComponent<DinosaurObjectGetter> ();
 						if (getter != null) {
 							Dinosaur enemy = getter.dinosaur ();
-							if (enemy != null) {
-								me.Attack (enemy);
-								attack_is_cooling_down = true;
-								break;
+							if (enemy != null && enemy.Is_Alive ()) {
+								if (me.Attack (enemy)) {
+									attack_is_cooling_down = true;
+									gameObject.GetComponentInChildren<Animation> ().Play ("Attack01");
+									break;
+								}
 							}
 						}
 					}

@@ -1358,7 +1358,7 @@ Animation:
   m_GameObject: {fileID: 189654}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 93d72b4556df7a14a8ba3e9636adba31, type: 2}
+  m_Animation: {fileID: 7400000, guid: 5dd80036bd6ec154eba27ead29ca16dc, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 5dd80036bd6ec154eba27ead29ca16dc, type: 2}
   - {fileID: 7400000, guid: 93d72b4556df7a14a8ba3e9636adba31, type: 2}
@@ -1462,6 +1462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomTime: .400000006
+  animations_implemented: 1
 --- !u!114 &11458670
 MonoBehaviour:
   m_ObjectHideFlags: 1

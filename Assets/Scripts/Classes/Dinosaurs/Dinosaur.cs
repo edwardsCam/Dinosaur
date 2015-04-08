@@ -58,8 +58,9 @@ public class Dinosaur
 
 	#region Attack and Damage actions
 
-	public void Attack (Dinosaur other)
+	public bool Attack (Dinosaur other)
 	{
+		bool success = false;
 		float expend = energy.StaminaExpenditure ();
 		if (current_stamina >= expend) {
 			if (other != null) {
@@ -69,9 +70,11 @@ public class Dinosaur
 					UnityEngine.Debug.Log ("Killed " + other);
 					addXP (30); //TODO
 				}
+				success = true;
 			}
 			current_stamina -= expend;
 		}
+		return success;
 	}
 
 	public void TakeDamage (float d)

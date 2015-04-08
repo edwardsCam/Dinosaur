@@ -26,7 +26,9 @@ namespace Assets.Scripts.AI.Allosaurus
 			dino.getNavAgent ().destination = self.transform.position;
 
 			Animation ani = self.GetComponentInChildren<Animation> ();
-			ani.Play ("Allosaurus_Idle");
+			if (!ani.IsPlaying ("Attack01")) {
+				ani.Play ("Idle");
+			}
 		}
 	}
 }

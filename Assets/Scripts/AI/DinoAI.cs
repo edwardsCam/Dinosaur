@@ -37,8 +37,6 @@ namespace Assets.Scripts.AI
 			if (me.Is_Alive ()) {
 				intelligence.Decide (gameObject, target);
 				intelligence.Act (gameObject, target);
-			} else {
-				Destroy (gameObject);
 			}
 		}
 
