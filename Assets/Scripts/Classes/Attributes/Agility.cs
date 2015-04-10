@@ -5,12 +5,12 @@ namespace Attribute
 	public class Agility : Attribute
 	{
 		private Benefit movespeed;
-		private Benefit stamina_regen;
+		private Benefit attack_speed;
 
 		public Agility () : base()
 		{
 			movespeed = new Benefit ();
-			stamina_regen = new Benefit ();
+			attack_speed = new Benefit ();
 			GetBenefitsFromPoints ();
 		}
 		
@@ -25,21 +25,21 @@ namespace Attribute
 		{
 			float p = base.Points ();
 			movespeed.SetBase (Calculate._movespeed (p));
-			stamina_regen.SetBase (Calculate._staminaRegen (p));
+			attack_speed.SetBase (Calculate._attackSpeed (p));
 		}
 		
 		#endregion
 
 		#region Getters
 		
-		public float Movespeed ()
+		public float _Movespeed ()
 		{
 			return movespeed.Value ();
 		}
 
-		public float StaminaRegen ()
+		public float _AttackSpeed ()
 		{
-			return stamina_regen.Value ();
+			return attack_speed.Value ();
 		}
 		
 		#endregion
@@ -56,14 +56,14 @@ namespace Attribute
 			movespeed.AddTo_Modifier (m);
 		}
 
-		public void AddTo_StaminaRegen_Base (float b)
+		public void AddTo_AttackSpeed_Base (float b)
 		{
-			stamina_regen.AddTo_Base (b);
+			attack_speed.AddTo_Base (b);
 		}
 
-		public void AddTo_StaminaRegen_Modifier (float m)
+		public void AddTo_AttackSpeed_Modifier (float m)
 		{
-			stamina_regen.AddTo_Modifier (m);
+			attack_speed.AddTo_Modifier (m);
 		}
 		
 		#endregion

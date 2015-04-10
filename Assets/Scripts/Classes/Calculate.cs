@@ -16,14 +16,14 @@ static class Calculate
 	{
 		//1  point  -> 50
 		//10 points -> 400
-		return 11.111f + 38.889f * points;
+		return 11.1111f + 38.8889f * points;
 	}
 	
 	public static float _combatStrength (float points)
 	{
 		//1  point  -> 5
 		//10 points -> 25
-		return 2.778f + 2.222f * points;
+		return 2.7778f + 2.2222f * points;
 	}
 	
 	#endregion
@@ -34,14 +34,14 @@ static class Calculate
 	{
 		//1  point  -> 7
 		//10 points -> 30
-		return 4.444f + 2.556f * points;
+		return 4.4444f + 2.5556f * points;
 	}
-	
-	public static float _staminaRegen (float points)
+
+	public static float _attackSpeed (float points)
 	{
-		//1  point  -> 1
-		//10 points -> 10
-		return points;
+		//1  point  -> 3
+		//10 points -> 0.5
+		return 3.2777f - 0.2777f * points;
 	}
 	
 	#endregion
@@ -54,12 +54,12 @@ static class Calculate
 		//10 points -> 300
 		return 30f * points;
 	}
-	
-	public static float _staminaExpend (float points)
+
+	public static float _staminaRegen (float points)
 	{
-		//1  point  -> 15
-		//10 points -> 3
-		return 16.333f - 1.333f * points;
+		//1  point  -> 1
+		//10 points -> 10
+		return points;
 	}
 	
 	#endregion
@@ -78,7 +78,7 @@ static class Calculate
 	{
 		//1  point  -> 80
 		//10 points -> 150
-		float ret = 72.222f + 7.778f * points;
+		float ret = 72.2222f + 7.7778f * points;
 		return Math.Min (160f, ret);
 	}
 	
@@ -86,7 +86,14 @@ static class Calculate
 	{
 		//1  point  -> 100
 		//10 points -> 800
-		return 22.222f + 77.778f * points;
+		return 22.2222f + 77.7778f * points;
+	}
+
+	public static float _detectRadius (float points)
+	{
+		//1  point  -> 30
+		//10 points -> 100
+		return 22.2222f + 7.7778f * points;
 	}
 	
 	#endregion

@@ -9,8 +9,7 @@ namespace Assets.Scripts.AI
 
 		protected NavMeshAgent navAgent;
 		protected Dinosaur me;
-		
-		public float detectRadius = 50;
+
 		public float stopDistance = 10;
 		protected GameObject curTarget = null;
 
@@ -31,7 +30,7 @@ namespace Assets.Scripts.AI
 
 			navAgent = gameObject.GetComponent<NavMeshAgent> ();
 			me = gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur ();
-			navAgent.speed = me.Movespeed ();
+			navAgent.speed = me._Movespeed ();
 			navAgent.stoppingDistance = me.Attack_Radius ();
 		}
         
@@ -55,7 +54,7 @@ namespace Assets.Scripts.AI
 		public GameObject GetNewTarget ()
 		{
 			int layer = 1 << 8;
-			Collider[] hitColliders = Physics.OverlapSphere (gameObject.transform.position, detectRadius, layer);
+			Collider[] hitColliders = Physics.OverlapSphere (gameObject.transform.position, me._DetectRadius (), layer);
 			foreach (Collider otherObject in hitColliders) {
 				if (otherObject.gameObject != gameObject) {
 					return otherObject.gameObject;

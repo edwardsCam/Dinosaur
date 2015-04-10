@@ -6,7 +6,6 @@ public class Attacking : MonoBehaviour
 	private Dinosaur me;
 	private bool attack_is_cooling_down;
 	private float attack_timer;
-	public float attack_cooldown = 1.0f;
 	
 	void Start ()
 	{
@@ -20,7 +19,7 @@ public class Attacking : MonoBehaviour
 		if (me.Is_Alive ()) {
 			if (attack_is_cooling_down) {
 				attack_timer += Time.deltaTime;
-				if (attack_timer > attack_cooldown) {
+				if (attack_timer > me._AttackSpeed ()) {
 					attack_timer = 0f;
 					attack_is_cooling_down = false;
 				}
@@ -35,8 +34,9 @@ public class Attacking : MonoBehaviour
 							if (enemy != null && enemy.Is_Alive ()) {
 								if (me.Attack (enemy)) {
 									attack_is_cooling_down = true;
-									if (gameObject.GetComponentInChildren<Animation> () != null) {
-										gameObject.GetComponentInChildren<Animation> ().Play ("Attack0" + (Random.Range (0, 2) + 1).ToString ());
+									var ani = gameObject.GetComponentInChildren<Animation> ();
+									if (ani != null) {
+										ani.Play ("Attack0" + (Random.Range (0, 2) + 1).ToString ());
 									}
 									break;
 								}

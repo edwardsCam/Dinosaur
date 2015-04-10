@@ -33,14 +33,14 @@ namespace Attribute
 		
 		#region Getters
 		
-		public int RespawnTime ()
+		public int _RespawnTime ()
 		{
-			return respawn_time.ValueAsInt ();
+			return (int)respawn_time.Value ();
 		}
 		
-		public float RebirthPenalty ()
+		public float _RebirthPenalty ()
 		{
-			return rebirth_penalty.ValueAsInt ();
+			return rebirth_penalty.Value ();
 		}
 		
 		#endregion

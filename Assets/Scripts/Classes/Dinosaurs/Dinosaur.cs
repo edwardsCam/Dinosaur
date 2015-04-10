@@ -33,8 +33,8 @@ public class Dinosaur
 		reproducibility = new Attribute.Reproducibility ();
 		intelligence = new Attribute.Intelligence ();
 	
-		current_hp = strength.MaxHP ();
-		current_stamina = energy.MaxStamina ();
+		current_hp = strength._MaxHP ();
+		current_stamina = energy._MaxStamina ();
 		
 		attack_radius = new Benefit (10); //TODO
 
@@ -59,11 +59,11 @@ public class Dinosaur
 	public bool Attack (Dinosaur other)
 	{
 		bool success = false;
-		float expend = energy.StaminaExpenditure ();
+		float expend = 15;
 		if (current_stamina >= expend) {
 			if (other != null) {
 				addXP (1);
-				float damage = strength.CombatStrength ();
+				float damage = strength._CombatStrength ();
 				other.TakeDamage (damage);
 				if (!other.Is_Alive ()) {
 					UnityEngine.Debug.Log (this + " \u2620 " + other);
@@ -99,19 +99,19 @@ public class Dinosaur
 	public void Heal (float delta)
 	{
 		if (isAlive) {
-			Restore_HP (delta * survivability.HP_Regen ());
-			Restore_Stamina (delta * agility.StaminaRegen ());
+			Restore_HP (delta * survivability._HpRegen ());
+			Restore_Stamina (delta * energy._StaminaRegen ());
 		}
 	}
 
 	private void Restore_HP (float hp)
 	{
-		current_hp = Math.Min (current_hp + hp, strength.MaxHP ());
+		current_hp = Math.Min (current_hp + hp, strength._MaxHP ());
 	}
 
 	private void Restore_Stamina (float stam)
 	{
-		current_stamina = Math.Min (current_stamina + stam, energy.MaxStamina ());
+		current_stamina = Math.Min (current_stamina + stam, energy._MaxStamina ());
 	}
 
 	#endregion
@@ -178,9 +178,9 @@ public class Dinosaur
 	
 	protected void AddPointsTo_Strength (float p, bool is_intel_bonus = false)
 	{
-		float oldHP = strength.MaxHP ();
+		float oldHP = strength._MaxHP ();
 		strength.Add (p, is_intel_bonus);
-		current_hp += strength.MaxHP () - oldHP;
+		current_hp += strength._MaxHP () - oldHP;
 	}
 	
 	protected void AddPointsTo_Agility (float p, bool is_intel_bonus = false)
@@ -191,9 +191,9 @@ public class Dinosaur
 	
 	protected void AddPointsTo_Energy (float p, bool is_intel_bonus = false)
 	{
-		float oldStam = energy.MaxStamina ();
+		float oldStam = energy._MaxStamina ();
 		energy.Add (p, is_intel_bonus);
-		current_stamina += energy.MaxStamina () - oldStam;
+		current_stamina += energy._MaxStamina () - oldStam;
 	}
 	
 	protected void AddPointsTo_Sensory (float p, bool is_intel_bonus = false)
@@ -283,89 +283,94 @@ public class Dinosaur
 	
 	#region Strength
 	
-	public float Max_HP ()
+	public float _MaxHP ()
 	{
-		return strength.MaxHP ();
+		return strength._MaxHP ();
 	}
 	
-	public float Combat_Strength ()
+	public float _CombatStrength ()
 	{
-		return strength.CombatStrength ();
+		return strength._CombatStrength ();
 	}
 	
 	#endregion
 	
 	#region Agility
 	
-	public float Movespeed ()
+	public float _Movespeed ()
 	{
-		return agility.Movespeed ();
+		return agility._Movespeed ();
 	}
-	
-	public float Stamina_Regen ()
+
+	public float _AttackSpeed ()
 	{
-		return agility.StaminaRegen ();
+		return agility._AttackSpeed ();
 	}
 	
 	#endregion
 	
 	#region Energy
 	
-	public float Max_Stamina ()
+	public float _MaxStamina ()
 	{
-		return energy.MaxStamina ();
+		return energy._MaxStamina ();
 	}
 	
-	public float Stamina_Expenditure ()
+	public float _StaminaRegen ()
 	{
-		return energy.StaminaExpenditure ();
+		return energy._StaminaRegen ();
 	}
 	
 	#endregion
 	
 	#region Sensory
 	
-	public float MinFieldOfView ()
+	public float _MinFieldOfView ()
 	{
-		return sensory.MinFieldOfView ();
+		return sensory._MinFieldOfView ();
 	}
 	
-	public float MaxFieldOfView ()
+	public float _MaxFieldOfView ()
 	{
-		return sensory.MaxFieldOfView ();
+		return sensory._MaxFieldOfView ();
 	}
 	
-	public float VisibilityDistance ()
+	public float _VisibilityDistance ()
 	{
-		return sensory.VisibilityDistance ();
+		return sensory._VisibilityDistance ();
+	}
+
+	public float _DetectRadius ()
+	{
+		return sensory._DetectRadius ();
 	}
 	
 	#endregion
 	
 	#region Reproducibility
 	
-	public int Respawn_Time ()
+	public int _RespawnTime ()
 	{
-		return reproducibility.RespawnTime ();
+		return reproducibility._RespawnTime ();
 	}
 	
-	public float Rebirth_Penalty ()
+	public float _RebirthPenalty ()
 	{
-		return reproducibility.RebirthPenalty ();
+		return reproducibility._RebirthPenalty ();
 	}
 	
 	#endregion
 	
 	#region Survivability
 	
-	public float Extra_Food_Benefit ()
+	public float _ExtraFoodBenefit ()
 	{
-		return survivability.Extra_Food_Benefit ();
+		return survivability._ExtraFoodBenefit ();
 	}
 	
-	public float HP_Regen ()
+	public float _HpRegen ()
 	{
-		return survivability.HP_Regen ();
+		return survivability._HpRegen ();
 	}
 	
 	#endregion

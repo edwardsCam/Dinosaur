@@ -35,15 +35,15 @@ public class VitalsVM : MonoBehaviour
 		if (ready) {
 			float currhp = d.Current_HP ();
 			float currstam = d.Current_Stamina ();
-			float maxhp = d.Max_HP ();
-			float maxstam = d.Max_Stamina ();
+			float maxhp = d._MaxHP ();
+			float maxstam = d._MaxStamina ();
 			float currxp = d.Current_XP ();
 			float nextxp = d.Next_XP_Goal ();
 			healthSlider.value = currhp / maxhp;
 			staminaSlider.value = currstam / maxstam;
 			xpSlider.value = currxp / nextxp;
-			healthText.text = ((int)currhp).ToString () + "/" + ((int)maxhp).ToString () + (currhp == maxhp ? "" : "  (+" + d.HP_Regen ().ToString ("F2") + ")");
-			staminaText.text = ((int)currstam).ToString () + "/" + ((int)maxstam).ToString () + (currstam == maxstam ? "" : "  (+" + d.Stamina_Regen ().ToString ("F2") + ")");
+			healthText.text = ((int)currhp).ToString () + "/" + ((int)maxhp).ToString () + (currhp == maxhp ? "" : "  (+" + d._HpRegen ().ToString ("F2") + ")");
+			staminaText.text = ((int)currstam).ToString () + "/" + ((int)maxstam).ToString () + (currstam == maxstam ? "" : "  (+" + d._StaminaRegen ().ToString ("F2") + ")");
 			if (d.isAtMaxLevel ()) {
 				xpText.text = "MAX LEVEL";
 			} else {

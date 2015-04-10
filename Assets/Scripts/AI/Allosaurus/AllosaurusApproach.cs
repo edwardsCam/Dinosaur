@@ -12,9 +12,9 @@ namespace Assets.Scripts.AI.Allosaurus
 		public void Decide (GameObject self, GameObject target)
 		{
 			bool found_other = false;
-			AllosaurusAI dino = self.GetComponent<AllosaurusAI> ();
+			Dinosaur dino = self.GetComponent<DinosaurObjectGetter> ().dinosaur ();
 			int layer = 1 << 8;
-			Collider[] hitColliders = Physics.OverlapSphere (self.transform.position, dino.detectRadius, layer);
+			Collider[] hitColliders = Physics.OverlapSphere (self.transform.position, dino._DetectRadius (), layer);
 			foreach (Collider otherObject in hitColliders) {
 				if (otherObject.gameObject != self) {
 					found_other = true;
@@ -22,7 +22,7 @@ namespace Assets.Scripts.AI.Allosaurus
 				}
 			}
 			if (!found_other) {
-				dino.UpdateDecision ();
+				self.GetComponent<AllosaurusAI> ().UpdateDecision ();
 			}
 		}
 

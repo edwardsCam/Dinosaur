@@ -6,9 +6,6 @@ public class Navigation : MonoBehaviour
 
 	private NavMeshAgent navAgent;
 	private Dinosaur me;
-
-	public float detectRadius = 1000;
-	public float stopDistance = 10;
 	private GameObject target = null;
 
 	// Use this for initialization
@@ -16,7 +13,7 @@ public class Navigation : MonoBehaviour
 	{
 		navAgent = gameObject.GetComponent<NavMeshAgent> ();
 		me = gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur ();
-		navAgent.speed = me.Movespeed ();
+		navAgent.speed = me._Movespeed ();
 	}
 	
 	// Update is called once per frame
@@ -39,7 +36,7 @@ public class Navigation : MonoBehaviour
 
 	protected GameObject GetTarget ()
 	{
-		Collider[] hitColliders = Physics.OverlapSphere (gameObject.transform.position, detectRadius);
+		Collider[] hitColliders = Physics.OverlapSphere (gameObject.transform.position, me._DetectRadius ());
 		foreach (Collider otherObject in hitColliders) {
 			if (otherObject.gameObject.tag == "Player") {
 				return otherObject.gameObject;

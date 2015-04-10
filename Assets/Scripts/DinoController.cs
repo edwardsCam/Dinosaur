@@ -28,7 +28,6 @@ public class DinoController : MonoBehaviour
 	private bool hit_attack_key = false;
 	private bool attack_is_cooling_down = false;
 	private bool has_enemy_in_range;
-	private float attack_cooldown = 0.5f;
 	private float attack_timer = 0f;
 	#endregion
 
@@ -145,7 +144,7 @@ public class DinoController : MonoBehaviour
 			}
 			if (attack_is_cooling_down) {
 				attack_timer += delta;
-				if (attack_timer > attack_cooldown) {
+				if (attack_timer > me._AttackSpeed ()) {
 					attack_timer = 0f;
 					attack_is_cooling_down = false;
 				}
@@ -184,7 +183,7 @@ public class DinoController : MonoBehaviour
 	void update_speed ()
 	{
 		if (PlayerControlled) {
-			float speed = me.Movespeed ();
+			float speed = me._Movespeed ();
 			motor.movement.maxForwardSpeed = speed;
 			motor.movement.maxSidewaysSpeed = speed * 0.85f;
 			motor.movement.maxBackwardsSpeed = speed * 0.75f;
@@ -194,9 +193,9 @@ public class DinoController : MonoBehaviour
 	void update_visibility ()
 	{
 		if (PlayerControlled) {
-			minFOV = me.MinFieldOfView ();
-			maxFOV = me.MaxFieldOfView ();
-			cam.farClipPlane = me.VisibilityDistance ();
+			minFOV = me._MinFieldOfView ();
+			maxFOV = me._MaxFieldOfView ();
+			cam.farClipPlane = me._VisibilityDistance ();
 		}
 	}
 

@@ -32,12 +32,12 @@ namespace Attribute
 		
 		#region Getters
 		
-		public float MaxHP ()
+		public float _MaxHP ()
 		{
 			return maxHP.Value ();
 		}
 		
-		public float CombatStrength ()
+		public float _CombatStrength ()
 		{
 			return combatStrength.Value ();
 		}
