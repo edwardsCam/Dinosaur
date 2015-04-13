@@ -58,7 +58,7 @@ public class DinoSpawner : MonoBehaviour
 
 	private void Spawn (GameObject dino)
 	{
-		var instance = GameObject.Instantiate (dino, new Vector3 (0, 100, 0), Quaternion.identity) as GameObject;
+		var instance = GameObject.Instantiate (dino, new Vector3 (0, 4000, 0), Quaternion.identity) as GameObject;
 		instance.tag = "Player";
 		instance.GetComponent<DinoController> ().SpawnAsPlayer ();
 	}
