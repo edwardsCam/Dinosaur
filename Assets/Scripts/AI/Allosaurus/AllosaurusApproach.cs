@@ -6,26 +6,39 @@ using UnityEngine;
 
 namespace Assets.Scripts.AI.Allosaurus
 {
-    class AllosaurusApproach: IDecision
-    {
+	class AllosaurusApproach: IDecision
+	{
 
-        public void Decide(GameObject self, GameObject target)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+		public void Decide (GameObject self, GameObject target)
+		{
+			bool found_other = false;
+			Dinosaur dino = self.GetComponent<DinosaurObjectGetter> ().dinosaur ();
+			int layer = 1 << 8;
+			Collider[] hitColliders = Physics.OverlapSphere (self.transform.position, dino._DetectRadius (), layer);
+			foreach (Collider otherObject in hitColliders) {
+				if (otherObject.gameObject != self) {
+					found_other = true;
+					break;
+				}
+			}
+			if (!found_other) {
+				self.GetComponent<AllosaurusAI> ().UpdateDecision ();
+			}
+		}
 
-            if (player != null)
-            {
-                if (Vector3.Distance(player.transform.position, self.transform.position) > 40)
-                {
-                    self.GetComponent<DinoAI>().UpdateDecision(new AllosaurusIdle());
-                }
-            }
-        }
-
-        public void Act(GameObject self, GameObject target)
-        {
-            Animation ani = self.GetComponent<Animation>();
-            ani.Play("Allosaurus_Walk");
-        }
-    }
+		public void Act (GameObject self, GameObject target)
+		{
+			Animation ani = self.GetComponentInChildren<Animation> ();
+			AllosaurusAI dino = self.GetComponent<AllosaurusAI> ();
+			if (!ani.IsPlaying ("Attack01") && !ani.IsPlaying ("Attack02")) {
+				ani.Play ("Walk");
+			}
+			if (dino.getDinosaur ().Is_Alive ()) {
+				target = dino.GetNewTarget ();
+				if (target) {
+					dino.getNavAgent ().destination = target.transform.position;
+				}
+			}
+		}
+	}
 }

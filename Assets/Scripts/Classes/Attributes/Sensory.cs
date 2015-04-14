@@ -8,12 +8,14 @@ namespace Attribute
 		private Benefit min_fov;
 		private Benefit max_fov;
 		private Benefit distance;
+		private Benefit detect_radius;
 		
 		public Sensory () : base()
 		{
 			min_fov = new Benefit (false);
 			max_fov = new Benefit (false);
 			distance = new Benefit (false);
+			detect_radius = new Benefit ();
 			GetBenefitsFromPoints ();
 		}
 		
@@ -30,25 +32,31 @@ namespace Attribute
 			min_fov.SetBase (Calculate._minFieldOfView (p));
 			max_fov.SetBase (Calculate._maxFieldOfView (p));
 			distance.SetBase (Calculate._distance (p));
+			detect_radius.SetBase (Calculate._detectRadius (p));
 		}
 		
 		#endregion
 		
 		#region Getters
 		
-		public float MinFieldOfView ()
+		public float _MinFieldOfView ()
 		{
 			return min_fov.Value ();
 		}
 		
-		public float MaxFieldOfView ()
+		public float _MaxFieldOfView ()
 		{
 			return max_fov.Value ();
 		}
 		
-		public float VisibilityDistance ()
+		public float _VisibilityDistance ()
 		{
 			return distance.Value ();
+		}
+
+		public float _DetectRadius ()
+		{
+			return detect_radius.Value ();
 		}
 		
 		#endregion
@@ -68,6 +76,16 @@ namespace Attribute
 		public void AddTo_VisibilityDistance (int d)
 		{
 			distance.AddTo_Base (d);
+		}
+
+		public void AddTo_DetectRadius_Base (float b)
+		{
+			detect_radius.AddTo_Base (b);
+		}
+
+		public void AddTo_DetectRadius_Modifier (float m)
+		{
+			detect_radius.AddTo_Modifier (m);
 		}
 		
 		#endregion

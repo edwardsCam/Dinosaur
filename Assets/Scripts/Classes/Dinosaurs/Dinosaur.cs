@@ -15,11 +15,13 @@ public class Dinosaur
 	protected float current_hp;
 	protected float current_stamina;
 	protected Benefit attack_radius;
-	protected int total_xp;
-	protected int relative_xp;
+	protected float total_xp;
+	protected float relative_xp;
 	protected int level;
+	protected static int max_level;
 	public bool FLAG_movespeed_changed = false;
 	public bool FLAG_visibility_changed = false;
+	private string myName = "default";
 
 	public Dinosaur ()
 	{
@@ -31,10 +33,10 @@ public class Dinosaur
 		reproducibility = new Attribute.Reproducibility ();
 		intelligence = new Attribute.Intelligence ();
 	
-		current_hp = strength.MaxHP ();
-		current_stamina = energy.MaxStamina ();
+		current_hp = strength._MaxHP ();
+		current_stamina = energy._MaxStamina ();
 		
-		attack_radius = new Benefit (5); //TODO
+		attack_radius = new Benefit (10); //TODO
 
 		level = 1;
 		total_xp = 0;
@@ -42,14 +44,10 @@ public class Dinosaur
 		
 		if (XP_levels == null) {
 			var doc = XDocument.Load ("documentation/xp.xml").Element ("xp");
-			int max_level = Convert.ToInt16 (doc.Element ("max_level").Value);
+			max_level = Convert.ToInt16 (doc.Element ("max_level").Value);
 			XP_levels = new int[max_level + 2];
 			for (int i = 1; i <= max_level; i++) {
-				int v = Convert.ToInt16 (doc.Element ("l_" + i).Value);
-				XP_levels [i] = v;
-				if (i == max_level) {
-					XP_levels [i + 1] = v;
-				}
+				XP_levels [i] = Convert.ToInt16 (doc.Element ("l_" + i).Value);
 			}
 		}
 
@@ -58,20 +56,29 @@ public class Dinosaur
 
 	#region Attack and Damage actions
 
-	public void Attack (Dinosaur other)
+	public bool Attack (Dinosaur other)
 	{
-		float expend = energy.StaminaExpenditure ();
+		bool success = false;
+		float expend = 15;
 		if (current_stamina >= expend) {
 			if (other != null) {
-				float damage = strength.CombatStrength ();
+				addXP (1);
+				float damage = strength._CombatStrength ();
 				other.TakeDamage (damage);
+				if (!other.Is_Alive ()) {
+					UnityEngine.Debug.Log (this + " \u2620 " + other);
+					addXP (30); //TODO
+				}
+				success = true;
 			}
 			current_stamina -= expend;
 		}
+		return success;
 	}
 
 	public void TakeDamage (float d)
 	{
+		addXP (0.5f);
 		current_hp -= d;
 		if (current_hp <= 0) {
 			current_hp = 0;
@@ -92,41 +99,49 @@ public class Dinosaur
 	public void Heal (float delta)
 	{
 		if (isAlive) {
-			Restore_HP (delta * survivability.HP_Regen ());
-			Restore_Stamina (delta * agility.StaminaRegen ());
+			Restore_HP (delta * survivability._HpRegen ());
+			Restore_Stamina (delta * energy._StaminaRegen ());
 		}
 	}
 
 	private void Restore_HP (float hp)
 	{
-		current_hp = Math.Min (current_hp + hp, strength.MaxHP ());
+		current_hp = Math.Min (current_hp + hp, strength._MaxHP ());
 	}
 
 	private void Restore_Stamina (float stam)
 	{
-		current_stamina = Math.Min (current_stamina + stam, energy.MaxStamina ());
+		current_stamina = Math.Min (current_stamina + stam, energy._MaxStamina ());
 	}
 
 	#endregion
 
 	#region XP actions
 
-	public void addXP (int xp)
+	public void addXP (float xp)
 	{
 		total_xp += xp;
-		relative_xp += xp;
-		while (total_xp >= XP_levels[level + 1]) {
-			LevelUp ();
+		if (level < max_level) {
+			relative_xp += xp;
+			while (total_xp >= XP_levels[level + 1]) {
+				LevelUp ();
+				if (level == max_level) {
+					relative_xp = 0;
+					break;
+				}
+			}
 		}
 	}
 
 	private void LevelUp ()
 	{
-		level++;
-		relative_xp -= (XP_levels [level] - XP_levels [level - 1]);
+		if (level < max_level) {
+			int old_goal = XP_levels [level];
+			int new_goal = XP_levels [++level];
+			relative_xp -= new_goal - old_goal;
+		}
+		AddPointsTo_Intelligence (1);
 	}
-
-
 
 	#endregion
 	
@@ -134,6 +149,7 @@ public class Dinosaur
 
 	protected void BuildAttributesFromXML (string name)
 	{
+		myName = name;
 		var doc = XDocument.Load ("documentation/attributes.xml").Element ("species").Element (name);
 
 		int str = Convert.ToInt16 (doc.Element ("strength").Value) - 1;
@@ -162,9 +178,9 @@ public class Dinosaur
 	
 	protected void AddPointsTo_Strength (float p, bool is_intel_bonus = false)
 	{
-		float oldHP = strength.MaxHP ();
+		float oldHP = strength._MaxHP ();
 		strength.Add (p, is_intel_bonus);
-		current_hp += strength.MaxHP () - oldHP;
+		current_hp += strength._MaxHP () - oldHP;
 	}
 	
 	protected void AddPointsTo_Agility (float p, bool is_intel_bonus = false)
@@ -175,9 +191,9 @@ public class Dinosaur
 	
 	protected void AddPointsTo_Energy (float p, bool is_intel_bonus = false)
 	{
-		float oldStam = energy.MaxStamina ();
+		float oldStam = energy._MaxStamina ();
 		energy.Add (p, is_intel_bonus);
-		current_stamina += energy.MaxStamina () - oldStam;
+		current_stamina += energy._MaxStamina () - oldStam;
 	}
 	
 	protected void AddPointsTo_Sensory (float p, bool is_intel_bonus = false)
@@ -231,24 +247,31 @@ public class Dinosaur
 		return current_stamina;
 	}
 
-	public int Current_XP ()
+	public float Current_XP ()
 	{
 		return relative_xp;
 	}
 
-	public int Total_XP ()
+	public float Total_XP ()
 	{
 		return total_xp;
 	}
 	
 	public int Next_XP_Goal ()
 	{
-		return XP_levels [level + 1] - XP_levels [level];
+		if (level < max_level)
+			return XP_levels [level + 1] - XP_levels [level];
+		return 0;
 	}
 
 	public float Attack_Radius ()
 	{
 		return attack_radius.Value ();
+	}
+
+	public bool isAtMaxLevel ()
+	{
+		return level == max_level;
 	}
 
 	public bool Is_Alive ()
@@ -260,92 +283,102 @@ public class Dinosaur
 	
 	#region Strength
 	
-	public float Max_HP ()
+	public float _MaxHP ()
 	{
-		return strength.MaxHP ();
+		return strength._MaxHP ();
 	}
 	
-	public float Combat_Strength ()
+	public float _CombatStrength ()
 	{
-		return strength.CombatStrength ();
+		return strength._CombatStrength ();
 	}
 	
 	#endregion
 	
 	#region Agility
 	
-	public float Movespeed ()
+	public float _Movespeed ()
 	{
-		return agility.Movespeed ();
+		return agility._Movespeed ();
 	}
-	
-	public float Stamina_Regen ()
+
+	public float _AttackSpeed ()
 	{
-		return agility.StaminaRegen ();
+		return agility._AttackSpeed ();
 	}
 	
 	#endregion
 	
 	#region Energy
 	
-	public float Max_Stamina ()
+	public float _MaxStamina ()
 	{
-		return energy.MaxStamina ();
+		return energy._MaxStamina ();
 	}
 	
-	public float Stamina_Expenditure ()
+	public float _StaminaRegen ()
 	{
-		return energy.StaminaExpenditure ();
+		return energy._StaminaRegen ();
 	}
 	
 	#endregion
 	
 	#region Sensory
 	
-	public float MinFieldOfView ()
+	public float _MinFieldOfView ()
 	{
-		return sensory.MinFieldOfView ();
+		return sensory._MinFieldOfView ();
 	}
 	
-	public float MaxFieldOfView ()
+	public float _MaxFieldOfView ()
 	{
-		return sensory.MaxFieldOfView ();
+		return sensory._MaxFieldOfView ();
 	}
 	
-	public float VisibilityDistance ()
+	public float _VisibilityDistance ()
 	{
-		return sensory.VisibilityDistance ();
+		return sensory._VisibilityDistance ();
+	}
+
+	public float _DetectRadius ()
+	{
+		return sensory._DetectRadius ();
 	}
 	
 	#endregion
 	
 	#region Reproducibility
 	
-	public int Respawn_Time ()
+	public int _RespawnTime ()
 	{
-		return reproducibility.RespawnTime ();
+		return reproducibility._RespawnTime ();
 	}
 	
-	public float Rebirth_Penalty ()
+	public float _RebirthPenalty ()
 	{
-		return reproducibility.RebirthPenalty ();
+		return reproducibility._RebirthPenalty ();
 	}
 	
 	#endregion
 	
 	#region Survivability
 	
-	public float Extra_Food_Benefit ()
+	public float _ExtraFoodBenefit ()
 	{
-		return survivability.Extra_Food_Benefit ();
+		return survivability._ExtraFoodBenefit ();
 	}
 	
-	public float HP_Regen ()
+	public float _HpRegen ()
 	{
-		return survivability.HP_Regen ();
+		return survivability._HpRegen ();
 	}
 	
 	#endregion
+
+	public override string ToString ()
+	{
+		return myName;
+	}
 	
 	#endregion
 }

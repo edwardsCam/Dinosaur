@@ -33,12 +33,12 @@ namespace Attribute
 		
 		#region Getters
 		
-		public float HP_Regen ()
+		public float _HpRegen ()
 		{
 			return hp_regen.Value ();
 		}
 		
-		public float Extra_Food_Benefit ()
+		public float _ExtraFoodBenefit ()
 		{
 			return extra_food_benefit.Value ();
 		}

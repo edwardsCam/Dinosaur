@@ -34,13 +34,6 @@ public class Benefit
 		return (base_value + extra) * modifier;
 	}
 	
-	public int ValueAsInt ()
-	{
-	
-		//TODO rounding???
-		return (int)((base_value + extra) * modifier);
-	}
-	
 	#endregion
 
 	#region Setters and Mutators

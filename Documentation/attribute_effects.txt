@@ -1,0 +1,30 @@
+
+Strength:
+	Max HP
+	Attack Damage
+
+Agility:
+	Movespeed
+	Attack speed
+
+Energy:
+	Max Stamina
+	Stamina Regen
+
+Sensory:
+	(Player):
+		Min / Max FOV
+		Visibility Distance
+	(AI):
+		Detect Radius
+
+Reproducibility:
+	Respawn Time
+	Rebirth Penalty
+
+Survivability:
+	HP Regen
+	Food Benefit
+
+Intelligence:
+	Blanket improvement over all other attributes

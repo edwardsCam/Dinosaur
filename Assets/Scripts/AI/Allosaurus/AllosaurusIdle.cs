@@ -6,26 +6,34 @@ using UnityEngine;
 
 namespace Assets.Scripts.AI.Allosaurus
 {
-    class AllosaurusIdle : IDecision
-    {
+	class AllosaurusIdle : IDecision
+	{
 
-        public void Decide(GameObject self, GameObject target)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
+		public void Decide (GameObject self, GameObject target)
+		{
+			Dinosaur dino = self.GetComponent<DinosaurObjectGetter> ().dinosaur ();
+			bool found_other = false;
+			int layer = 1 << 8;
+			Collider[] hitColliders = Physics.OverlapSphere (self.transform.position, dino._DetectRadius (), layer);
+			foreach (Collider otherObject in hitColliders) {
+				if (otherObject.gameObject != self) {
+					found_other = true;
+				}
+			}
+			if (found_other) {
+				self.GetComponent<AllosaurusAI> ().UpdateDecision ();
+			}
+		}
 
-            if (player != null)
-            {
-                if (Vector3.Distance(player.transform.position, self.transform.position) < 40)
-                {
-                    self.GetComponent<DinoAI>().UpdateDecision(new AllosaurusApproach());
-                }
-            }
-        }
+		public void Act (GameObject self, GameObject target)
+		{
+			AllosaurusAI dino = self.GetComponent<AllosaurusAI> ();
+			dino.getNavAgent ().destination = self.transform.position;
 
-        public void Act(GameObject self, GameObject target)
-        {
-            Animation ani = self.GetComponent<Animation>();
-            ani.Play("Allosaurus_Idle");
-        }
-    }
+			Animation ani = self.GetComponentInChildren<Animation> ();
+			if (!ani.IsPlaying ("Attack01") && !ani.IsPlaying ("Attack02")) {
+				ani.Play ("Idle");
+			}
+		}
+	}
 }

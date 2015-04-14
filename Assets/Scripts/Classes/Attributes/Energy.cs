@@ -5,12 +5,12 @@ namespace Attribute
 	public class Energy : Attribute
 	{
 		private Benefit max_stamina;
-		private Benefit stamina_expend;
+		private Benefit stamina_regen;
 		
 		public Energy () : base()
 		{
 			max_stamina = new Benefit ();
-			stamina_expend = new Benefit ();
+			stamina_regen = new Benefit ();
 			GetBenefitsFromPoints ();
 		}
 		
@@ -25,21 +25,21 @@ namespace Attribute
 		{
 			float p = base.Points ();
 			max_stamina.SetBase (Calculate._maxStamina (p));
-			stamina_expend.SetBase (Calculate._staminaExpend (p));
+			stamina_regen.SetBase (Calculate._staminaRegen (p));
 		}
 		
 		#endregion
 		
 		#region Getters
 		
-		public float MaxStamina ()
+		public float _MaxStamina ()
 		{
 			return max_stamina.Value ();
 		}
 		
-		public float StaminaExpenditure ()
+		public float _StaminaRegen ()
 		{
-			return stamina_expend.Value ();
+			return stamina_regen.Value ();
 		}
 		
 		#endregion
@@ -56,14 +56,14 @@ namespace Attribute
 			max_stamina.AddTo_Modifier (m);
 		}
 		
-		public void AddTo_StaminaExpend_Base (float b)
+		public void AddTo_StaminaRegen_Base (float b)
 		{
-			stamina_expend.AddTo_Base (b);
+			stamina_regen.AddTo_Base (b);
 		}
 		
-		public void AddTo_StaminaExpend_Modifier (float m)
+		public void AddTo_StaminaRegen_Modifier (float m)
 		{
-			stamina_expend.AddTo_Modifier (m);
+			stamina_regen.AddTo_Modifier (m);
 		}
 		
 		#endregion
