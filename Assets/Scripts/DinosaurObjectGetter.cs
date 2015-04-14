@@ -20,6 +20,9 @@ public class DinosaurObjectGetter : MonoBehaviour
 		case Assets.Scripts.DinosaurType.Allosaurus:
 			d = new Species.Allosaurus ();
 			break;
+		case Assets.Scripts.DinosaurType.PassiveAllosaurus:
+			d = new Species.Allosaurus ();
+			break;
 		case Assets.Scripts.DinosaurType.Triceratops:
 			d = new Species.Triceratops ();
 			break;

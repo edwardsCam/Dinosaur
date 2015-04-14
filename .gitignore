@@ -36,3 +36,7 @@ InspectorExpandedItems.asset
 MonoManager.asset
 NetworkManager.asset
 ScriptMapper
+
+# OSX temp files
+.DS_Store
+._DS_Store
