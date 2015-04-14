@@ -86,7 +86,8 @@ static class Calculate
 	{
 		//1  point  -> 100
 		//10 points -> 800
-		return 22.2222f + 77.7778f * points;
+		//return 22.2222f + 77.7778f * points;
+		return 3000;
 	}
 
 	public static float _detectRadius (float points)
