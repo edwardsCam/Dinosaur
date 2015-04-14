@@ -4,30 +4,30 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Assets.Scripts.AI.Allosaurus
+namespace Assets.Scripts.AI.PassiveAllosaurus
 {
-	class AllosaurusIdle : IDecision
+	class PassiveAllosaurusIdle : IDecision
 	{
 
 		public void Decide (GameObject self, GameObject target)
 		{
-			Dinosaur dino = self.GetComponent<DinosaurObjectGetter> ().dinosaur ();
-			bool found_other = false;
-			int layer = 1 << 8;
-			Collider[] hitColliders = Physics.OverlapSphere (self.transform.position, dino._DetectRadius (), layer);
-			foreach (Collider otherObject in hitColliders) {
-				if (otherObject.gameObject != self) {
-					found_other = true;
-				}
-			}
-			if (found_other) {
-				self.GetComponent<AllosaurusAI> ().UpdateDecision ();
-			}
+//			Dinosaur dino = self.GetComponent<DinosaurObjectGetter> ().dinosaur ();
+//			bool found_other = false;
+//			int layer = 1 << 8;
+//			Collider[] hitColliders = Physics.OverlapSphere (self.transform.position, dino._DetectRadius (), layer);
+//			foreach (Collider otherObject in hitColliders) {
+//				if (otherObject.gameObject != self) {
+//					found_other = true;
+//				}
+//			}
+//			if (found_other) {
+//				self.GetComponent<PassiveAllosaurusAI> ().UpdateDecision ();
+//			}
 		}
 
 		public void Act (GameObject self, GameObject target)
 		{
-			AllosaurusAI dino = self.GetComponent<AllosaurusAI> ();
+			PassiveAllosaurusAI dino = self.GetComponent<PassiveAllosaurusAI> ();
 			float detectRadius = self.GetComponent<DinosaurObjectGetter> ().dinosaur ()._DetectRadius ();
 
 			if (UnityEngine.Random.value <= 0.025) {

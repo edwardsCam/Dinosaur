@@ -2,6 +2,7 @@
 using System.Collections;
 using Assets.Scripts.AI.Allosaurus;
 
+
 namespace Assets.Scripts.AI
 {
 	abstract class DinoAI : MonoBehaviour
@@ -24,6 +25,9 @@ namespace Assets.Scripts.AI
 				intelligence = new AllosaurusIdle ();
 				break;
 
+			case DinosaurType.PassiveAllosaurus:
+				intelligence = new PassiveAllosaurus.PassiveAllosaurusIdle ();
+				break;
 			//TODO more AI's!
 
 			}
