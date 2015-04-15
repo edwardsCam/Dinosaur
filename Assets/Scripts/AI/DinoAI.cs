@@ -3,6 +3,7 @@ using System.Collections;
 using Assets.Scripts.AI.Allosaurus;
 using Assets.Scripts.AI.Triceratops;
 
+
 namespace Assets.Scripts.AI
 {
 <<<<<<< HEAD
@@ -63,6 +64,9 @@ namespace Assets.Scripts.AI
 				intelligence = new AllosaurusIdle ();
 				break;
 
+			case DinosaurType.PassiveAllosaurus:
+				intelligence = new PassiveAllosaurus.PassiveAllosaurusIdle ();
+				break;
 			//TODO more AI's!
 
 			}

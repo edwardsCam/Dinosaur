@@ -30,7 +30,8 @@ namespace Assets.Scripts
 		Allosaurus,
 		Triceratops,
 		Spinosaurus,
-		Brachiosaurus
+		Brachiosaurus,
+		PassiveAllosaurus
 	}
 >>>>>>> d15c1338dfbf86b96ee258c1b79d094c9e617d74
 }
