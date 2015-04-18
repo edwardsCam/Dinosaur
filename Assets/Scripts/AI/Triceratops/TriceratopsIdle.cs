@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.AI.Triceratops
 {
-    class TriceratopsIdle :IDecision
+    public class TriceratopsIdle :IDecision
     {
         public float detectRadius = 30;
         public TriceratopsIdle()
@@ -22,9 +22,8 @@ namespace Assets.Scripts.AI.Triceratops
                 {
             		if (otherObject.gameObject.tag == "Player") 
                     {
-                        DinoAI ai = self.GetComponent<DinoAI>();
-                        ai.UpdateTarget(otherObject.gameObject);
-                        ai.UpdateDecision(new TriceratopsCharge(self, otherObject.gameObject));
+                        var ai = self.GetComponent<TriceratopsAI>();
+                        ai.UpdateDecision();
             		}
             	}
         }

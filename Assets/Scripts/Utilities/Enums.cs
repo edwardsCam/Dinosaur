@@ -11,17 +11,6 @@ namespace Assets.Scripts
 		Health,
 		Stamina
 	}
-<<<<<<< HEAD
-    public enum DinosaurType
-    {
-        none,
-        Raptor,
-        Small,
-        TRex,
-        Allosaurus,
-        Triceratops,
-    }
-=======
 	public enum DinosaurType
 	{
 		none,
@@ -33,5 +22,5 @@ namespace Assets.Scripts
 		Brachiosaurus,
 		PassiveAllosaurus
 	}
->>>>>>> d15c1338dfbf86b96ee258c1b79d094c9e617d74
+
 }

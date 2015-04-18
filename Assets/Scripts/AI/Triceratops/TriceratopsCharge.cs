@@ -9,17 +9,17 @@ namespace Assets.Scripts.AI.Triceratops
     class TriceratopsCharge: IDecision
     {
 
-        Vector3 chargeLocation;
+        Vector3 chargeLocation = Vector3.zero;
         NavMeshAgent navAgent;
         float detectRadius = 30;
-        public TriceratopsCharge(GameObject self, GameObject target)
+        public TriceratopsCharge()
         {
-            chargeLocation = target.transform.position;
-            navAgent = self.GetComponent<NavMeshAgent>();
+            
             Debug.Log("Charging");
         }
         public void Decide(UnityEngine.GameObject self, UnityEngine.GameObject target)
         {
+            navAgent = self.GetComponent<NavMeshAgent>();
             if (Vector3.Distance(self.transform.position, chargeLocation) < navAgent.stoppingDistance)
             {
                 CheckForPlayer(self, target);
@@ -41,13 +41,16 @@ namespace Assets.Scripts.AI.Triceratops
 
             if(!playerWithinRange)
             {
-                self.GetComponent<DinoAI>().UpdateTarget(null);
-                self.GetComponent<DinoAI>().UpdateDecision(new TriceratopsIdle());
+                self.GetComponent<DinoAI>().UpdateDecision();
             }
         }
 
         public void Act(UnityEngine.GameObject self, UnityEngine.GameObject target)
         {
+            if(chargeLocation == Vector3.zero)
+            {
+                chargeLocation = target.transform.position;
+            }
             if (Vector3.Distance(self.transform.position, chargeLocation) > navAgent.stoppingDistance)
             {
                 NavMeshPath path = new NavMeshPath();
