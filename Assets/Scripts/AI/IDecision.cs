@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.AI
 {
-    interface IDecision
+    public interface IDecision
     {
         void Decide(GameObject self, GameObject target);
 

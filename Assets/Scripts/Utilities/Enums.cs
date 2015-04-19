@@ -22,4 +22,5 @@ namespace Assets.Scripts
 		Brachiosaurus,
 		PassiveAllosaurus
 	}
+
 }
