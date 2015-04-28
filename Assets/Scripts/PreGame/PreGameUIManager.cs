@@ -8,6 +8,15 @@ public class PreGameUIManager : MonoBehaviour {
     public Animator startButton;
     public Animator selectionButtons;
     public Animator worldsButtons;
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+
+        }
+    }
 	// Use this for initialization
 	private void LoadLevel(string level) 
     {
