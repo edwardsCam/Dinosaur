@@ -8,7 +8,6 @@ public class Navigation : MonoBehaviour
 	private Dinosaur me;
 	private GameObject target = null;
 
-	// Use this for initialization
 	void Start ()
 	{
 		navAgent = gameObject.GetComponent<NavMeshAgent> ();
@@ -16,7 +15,6 @@ public class Navigation : MonoBehaviour
 		navAgent.speed = me._Movespeed ();
 	}
 	
-	// Update is called once per frame
 	void Update ()
 	{
 		if (me.Is_Alive ()) {
@@ -24,13 +22,6 @@ public class Navigation : MonoBehaviour
 			if (target) {
 				navAgent.destination = target.transform.position;
 			}
-//		if (navAgent.remainingDistance > navAgent.stoppingDistance || double.IsInfinity(navAgent.remainingDistance) || navAgent.remainingDistance <= navAgent.stoppingDistance / 2) {
-//			print ("setting target");
-//		}
-//		if (navAgent.remainingDistance <= stopDistance || double.IsInfinity(navAgent.remainingDistance)) {
-//
-//			GetTarget();
-//		}
 		}
 	}
 

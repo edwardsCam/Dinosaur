@@ -9,7 +9,6 @@ namespace Assets.Scripts.AI
     public interface IDecision
     {
         void Decide(GameObject self, GameObject target);
-
         void Act(GameObject self, GameObject target);
     }
 }

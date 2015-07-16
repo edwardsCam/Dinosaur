@@ -12,7 +12,7 @@ public class DinoSpawner : MonoBehaviour
 	public GameObject triceratops;
 	public GameObject spinosaurus;
 	public GameObject brachiosaurus;
-	// Use this for initialization
+	
 	void Awake ()
 	{
 		GameSettings settings = GameObject.FindGameObjectWithTag ("Settings").GetComponent<GameSettings> ();

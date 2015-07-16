@@ -12,9 +12,8 @@ namespace Assets.Scripts.AI.Triceratops
         public TriceratopsIdle()
         {
             Debug.Log("Idle-ing");
-
-
         }
+        
         public void Decide(UnityEngine.GameObject self, UnityEngine.GameObject target)
         {
             Collider[] hitColliders = Physics.OverlapSphere(self.transform.position, detectRadius);

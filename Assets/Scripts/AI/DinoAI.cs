@@ -8,31 +8,22 @@ using Assets.Scripts.AI.Allosaurus;
 namespace Assets.Scripts.AI 
 { 
 	public abstract class DinoAI : MonoBehaviour 
-	{ 
- 
-
+	{
+		public float stopDistance = 10; 
  		protected NavMeshAgent navAgent; 
  		protected Dinosaur me; 
- 
-
- 		public float stopDistance = 10; 
  		protected GameObject curTarget = null; 
- 
-
  		protected IDecision intelligence; 
  		GameObject target = null; 
  
-
  		public void Start () 
  		{ 
  			switch (gameObject.GetComponent<DinosaurObjectGetter> ().type ()) { 
  
-
  			case DinosaurType.Allosaurus: 
  				intelligence = new AllosaurusIdle (); 
  				break; 
  
-
  			case DinosaurType.PassiveAllosaurus: 
  				intelligence = new PassiveAllosaurus.PassiveAllosaurusIdle (); 
  				break; 
@@ -40,11 +31,8 @@ namespace Assets.Scripts.AI
                 intelligence = new Triceratops.TriceratopsIdle();
                 break;
  			//TODO more AI's! 
- 
-
  			} 
  
-
  			navAgent = gameObject.GetComponent<NavMeshAgent> (); 
  			me = gameObject.GetComponent<DinosaurObjectGetter> ().dinosaur (); 
  			navAgent.speed = me._Movespeed (); 
@@ -59,19 +47,14 @@ namespace Assets.Scripts.AI
  			} 
  		} 
  
-
  		public void UpdateDecision () 
  		{ 
  			intelligence = getNextDecision (); 
  		} 
  
-
  		protected abstract IDecision getNextDecision (); 
  		protected abstract IDecision defaultDecision (); 
  
-
- 
-
  		public GameObject GetNewTarget () 
  		{ 
  			int layer = 1 << 8; 
@@ -84,24 +67,20 @@ namespace Assets.Scripts.AI
  			return null; 
  		} 
  
-
  		public Dinosaur getDinosaur () 
  		{ 
  			return me; 
  		} 
- 
 
  		public NavMeshAgent getNavAgent () 
  		{ 
  			return navAgent; 
  		} 
- 
 
  		public void setTarget (GameObject newTarget) 
  		{ 
  			curTarget = newTarget; 
  		} 
- 
 
  		public GameObject getTarget () 
  		{ 
