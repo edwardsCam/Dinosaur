@@ -1,0 +1,60 @@
+<!-- these numbers are taken from https://docs.google.com/spreadsheets/d/1iFu6LpLsf9QlxIve1ivWTQ2Rtc8C55LqGwW69TnCPdY -->
+
+<species>
+
+	<allosaurus>
+		<stren>3</stren>
+		<aglty>1</aglty>
+		<enrgy>2</enrgy>
+		<sense>2</sense>
+		<repro>3</repro>
+		<survi>3</survi>
+		<intel>1</intel>
+	</allosaurus>
+	<brachiosaurus>
+		<stren>3</stren>
+		<aglty>1</aglty>
+		<enrgy>2</enrgy>
+		<sense>2</sense>
+		<repro>1</repro>
+		<survi>5</survi>
+		<intel>1</intel>
+	</brachiosaurus>
+	<spinosaurus>
+		<stren>2</stren>
+		<aglty>3</aglty>
+		<enrgy>2</enrgy>
+		<sense>2</sense>
+		<repro>3</repro>
+		<survi>2</survi>
+		<intel>1</intel>
+	</spinosaurus>
+	<trex>
+		<stren>5</stren>
+		<aglty>1</aglty>
+		<enrgy>2</enrgy>
+		<sense>2</sense>
+		<repro>1</repro>
+		<survi>3</survi>
+		<intel>1</intel>
+	</trex>
+	<triceratops>
+		<stren>3</stren>
+		<aglty>1</aglty>
+		<enrgy>4</enrgy>
+		<sense>1</sense>
+		<repro>2</repro>
+		<survi>3</survi>
+		<intel>1</intel>
+	</triceratops>
+	<velociraptor>
+		<stren>1</stren>
+		<aglty>4</aglty>
+		<enrgy>1</enrgy>
+		<sense>2</sense>
+		<repro>2</repro>
+		<survi>1</survi>
+		<intel>4</intel>
+	</velociraptor>
+	
+</species>

@@ -43,7 +43,7 @@ public class Dinosaur
 		relative_xp = 0;
 		
 		if (XP_levels == null) {
-			var doc = XDocument.Load ("documentation/xp.xml").Element ("xp");
+			var doc = XDocument.Load ("resources/xp.xml").Element ("xp");
 			max_level = Convert.ToInt16 (doc.Element ("max_level").Value);
 			XP_levels = new int[max_level + 2];
 			for (int i = 1; i <= max_level; i++) {
@@ -150,30 +150,30 @@ public class Dinosaur
 	protected void BuildAttributesFromXML (string name)
 	{
 		myName = name;
-		var doc = XDocument.Load ("documentation/attributes.xml").Element ("species").Element (name);
+		var doc = XDocument.Load ("resources/attributes.xml").Element ("species").Element (name);
 
-		int str = Convert.ToInt16 (doc.Element ("strength").Value) - 1;
-		int agi = Convert.ToInt16 (doc.Element ("agility").Value) - 1;
-		int ene = Convert.ToInt16 (doc.Element ("energy").Value) - 1;
-		int sen = Convert.ToInt16 (doc.Element ("sensory").Value) - 1;
-		int rep = Convert.ToInt16 (doc.Element ("reproducibility").Value) - 1;
-		int sur = Convert.ToInt16 (doc.Element ("survivability").Value) - 1;
-		int tel = Convert.ToInt16 (doc.Element ("intelligence").Value) - 1;
+		int str = Convert.ToInt16 (doc.Element ("stren").Value);
+		int agi = Convert.ToInt16 (doc.Element ("aglty").Value);
+		int ene = Convert.ToInt16 (doc.Element ("enrgy").Value);
+		int sen = Convert.ToInt16 (doc.Element ("sense").Value);
+		int rep = Convert.ToInt16 (doc.Element ("repro").Value);
+		int sur = Convert.ToInt16 (doc.Element ("survi").Value);
+		int tel = Convert.ToInt16 (doc.Element ("intel").Value);
 
-		if (str > 0)
-			AddPointsTo_Strength (str);
-		if (agi > 0)
-			AddPointsTo_Agility (agi);
-		if (ene > 0)
-			AddPointsTo_Energy (ene);
-		if (sen > 0)
-			AddPointsTo_Sensory (sen);
-		if (rep > 0)
-			AddPointsTo_Reproducibility (rep);
-		if (sur > 0)
-			AddPointsTo_Survivability (sur);
-		if (tel > 0)
-			AddPointsTo_Intelligence (tel);
+		if (str > 1)
+			AddPointsTo_Strength (str - 1);
+		if (agi > 1)
+			AddPointsTo_Agility (agi - 1);
+		if (ene > 1)
+			AddPointsTo_Energy (ene - 1);
+		if (sen > 1)
+			AddPointsTo_Sensory (sen - 1);
+		if (rep > 1)
+			AddPointsTo_Reproducibility (rep - 1);
+		if (sur > 1)
+			AddPointsTo_Survivability (sur - 1);
+		if (tel > 1)
+			AddPointsTo_Intelligence (tel - 1);
 	}
 	
 	protected void AddPointsTo_Strength (float p, bool is_intel_bonus = false)
