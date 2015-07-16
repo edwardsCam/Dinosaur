@@ -12,8 +12,8 @@ public class Dinosaur
 	protected Attribute.Survivability survivability;
 	protected Attribute.Reproducibility reproducibility;
 	protected Attribute.Intelligence intelligence;
-	protected float current_hp;
-	protected float current_stamina;
+	protected float current_hp, max_hp;
+	protected float current_stamina, max_stamina;
 	protected Benefit attack_radius;
 	protected float total_xp;
 	protected float relative_xp;
@@ -33,8 +33,8 @@ public class Dinosaur
 		reproducibility = new Attribute.Reproducibility ();
 		intelligence = new Attribute.Intelligence ();
 	
-		current_hp = strength._MaxHP ();
-		current_stamina = energy._MaxStamina ();
+		current_hp = max_hp = strength._MaxHP ();
+		current_stamina = max_stamina = energy._MaxStamina ();
 		
 		attack_radius = new Benefit (10); //TODO
 
@@ -106,12 +106,12 @@ public class Dinosaur
 
 	private void Restore_HP (float hp)
 	{
-		current_hp = Math.Min (current_hp + hp, strength._MaxHP ());
+		current_hp = Math.Min (current_hp + hp, max_hp);
 	}
 
 	private void Restore_Stamina (float stam)
 	{
-		current_stamina = Math.Min (current_stamina + stam, energy._MaxStamina ());
+		current_stamina = Math.Min (current_stamina + stam, max_stamina);
 	}
 
 	#endregion
@@ -137,7 +137,8 @@ public class Dinosaur
 	{
 		if (level < max_level) {
 			int old_goal = XP_levels [level];
-			int new_goal = XP_levels [++level];
+			level++;
+			int new_goal = XP_levels [level];
 			relative_xp -= new_goal - old_goal;
 		}
 		AddPointsTo_Intelligence (1);
@@ -160,27 +161,21 @@ public class Dinosaur
 		int sur = Convert.ToInt16 (doc.Element ("survi").Value);
 		int tel = Convert.ToInt16 (doc.Element ("intel").Value);
 
-		if (str > 1)
-			AddPointsTo_Strength (str - 1);
-		if (agi > 1)
-			AddPointsTo_Agility (agi - 1);
-		if (ene > 1)
-			AddPointsTo_Energy (ene - 1);
-		if (sen > 1)
-			AddPointsTo_Sensory (sen - 1);
-		if (rep > 1)
-			AddPointsTo_Reproducibility (rep - 1);
-		if (sur > 1)
-			AddPointsTo_Survivability (sur - 1);
-		if (tel > 1)
-			AddPointsTo_Intelligence (tel - 1);
+		if (str > 1) AddPointsTo_Strength (str - 1);
+		if (agi > 1) AddPointsTo_Agility (agi - 1);
+		if (ene > 1) AddPointsTo_Energy (ene - 1);
+		if (sen > 1) AddPointsTo_Sensory (sen - 1);
+		if (rep > 1) AddPointsTo_Reproducibility (rep - 1);
+		if (sur > 1) AddPointsTo_Survivability (sur - 1);
+		if (tel > 1) AddPointsTo_Intelligence (tel - 1);
 	}
 	
 	protected void AddPointsTo_Strength (float p, bool is_intel_bonus = false)
 	{
-		float oldHP = strength._MaxHP ();
+		float oldHP = max_hp;
 		strength.Add (p, is_intel_bonus);
-		current_hp += strength._MaxHP () - oldHP;
+		max_hp = strength._MaxHP();
+		current_hp += max_hp - oldHP;
 	}
 	
 	protected void AddPointsTo_Agility (float p, bool is_intel_bonus = false)
@@ -191,9 +186,10 @@ public class Dinosaur
 	
 	protected void AddPointsTo_Energy (float p, bool is_intel_bonus = false)
 	{
-		float oldStam = energy._MaxStamina ();
+		float oldStam = max_stamina;
 		energy.Add (p, is_intel_bonus);
-		current_stamina += energy._MaxStamina () - oldStam;
+		max_stamina = energy._MaxStamina();
+		current_stamina += max_stamina - oldStam;
 	}
 	
 	protected void AddPointsTo_Sensory (float p, bool is_intel_bonus = false)
@@ -285,7 +281,7 @@ public class Dinosaur
 	
 	public float _MaxHP ()
 	{
-		return strength._MaxHP ();
+		return max_hp;
 	}
 	
 	public float _CombatStrength ()
@@ -313,7 +309,7 @@ public class Dinosaur
 	
 	public float _MaxStamina ()
 	{
-		return energy._MaxStamina ();
+		return max_stamina;
 	}
 	
 	public float _StaminaRegen ()
