@@ -43,7 +43,7 @@ public class DinoController : MonoBehaviour
 				//Make sure all the anims that we use are implemented.
 				animations_implemented = 
 					ani ["Attack01"] != null && 
-					ani ["Attack01"] != null && 
+					ani ["Attack02"] != null && 
 					ani ["Idle"] != null &&
 					ani ["Walk"] != null && 
 					ani ["Die"] != null;

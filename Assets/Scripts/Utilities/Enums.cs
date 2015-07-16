@@ -11,6 +11,7 @@ namespace Assets.Scripts
 		Health,
 		Stamina
 	}
+	
 	public enum DinosaurType
 	{
 		none,
@@ -22,5 +23,4 @@ namespace Assets.Scripts
 		Brachiosaurus,
 		PassiveAllosaurus
 	}
-
 }

@@ -132,5 +132,3 @@ static class Calculate
 	
 	#endregion
 }
-
-

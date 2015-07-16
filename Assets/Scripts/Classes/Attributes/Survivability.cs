@@ -65,4 +65,3 @@ namespace Attribute
 		#endregion
 	}
 }
-

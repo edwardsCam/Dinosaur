@@ -44,4 +44,3 @@ namespace Attribute
 		protected abstract void GetBenefitsFromPoints ();
 	}
 }
-

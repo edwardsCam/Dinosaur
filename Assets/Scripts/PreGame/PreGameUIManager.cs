@@ -14,10 +14,9 @@ public class PreGameUIManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
-
         }
     }
-	// Use this for initialization
+
 	private void LoadLevel(string level) 
     {
         Application.LoadLevel(level);
@@ -28,7 +27,6 @@ public class PreGameUIManager : MonoBehaviour {
         selectionButtons.SetBool("isHidden", false);
         selectionButtons.enabled = true;
         startButton.SetBool("isHidden", true);
-        
     }
 
     public void TRexButtonClicked()
@@ -63,5 +61,4 @@ public class PreGameUIManager : MonoBehaviour {
     {
         LoadLevel("mountain");
     }
-	
 }
